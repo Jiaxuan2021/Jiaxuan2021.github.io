@@ -35,7 +35,7 @@ jobs:
           cache-dependency-path: pnpm-lock.yaml
 
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile || pnpm install
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build
         run: pnpm exec hexo generate
