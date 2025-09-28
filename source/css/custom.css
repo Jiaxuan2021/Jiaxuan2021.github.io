@@ -1,22 +1,21 @@
 /* Force the avatar image to render as a centered circle */
 /* Try common theme avatar selectors first */
 img.site-avatar, img.avatar, .site-author-image img, .author-info .avatar img {
-  width: 160px;
-  height: 160px;
+  width: 100% !important;      /* fill container */
+  height: 100% !important;
   border-radius: 50%;
   object-fit: cover;            /* center crop */
   object-position: 50% 60%; /* move image up ~10% from center (show a bit lower area) */
   animation: none !important;   /* 默认不旋转，覆盖主题样式 */
   transform: none !important;
   will-change: transform;
-  display: block;               /* center horizontally */
-  margin: 0 auto;
+  display: block;               /* avoid inline gap */
 }
 
 /* Fallback: target the specific file path (png) */
 img[src$="/img/portrait.png"], img[src*="/img/portrait.png"] {
-  width: 160px;
-  height: 160px;
+  width: 100% !important;
+  height: 100% !important;
   border-radius: 50%;
   object-fit: cover;
   object-position: 50% 60%;
@@ -24,7 +23,6 @@ img[src$="/img/portrait.png"], img[src*="/img/portrait.png"] {
   transform: none !important;
   will-change: transform;
   display: block;
-  margin: 0 auto;
 }
 
 /* 悬停时才旋转 */
@@ -46,6 +44,15 @@ html body img.avatar {
   animation: none !important;
   transform: none !important;
   transition: none !important;
+}
+
+/* Fix avatar box size so image doesn't appear magnified */
+html body .avatar-img,
+html body .site-author-image,
+html body .author-info .avatar {
+  width: 120px !important;   /* adjust avatar size here */
+  height: 120px !important;
+  margin: 0 auto;
 }
 
 /* 容器悬停也触发旋转（兼容不同 DOM 结构） */
