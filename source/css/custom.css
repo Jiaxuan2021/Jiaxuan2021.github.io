@@ -5,7 +5,7 @@ img.site-avatar, img.avatar, .site-author-image img, .author-info .avatar img {
   height: 160px;
   border-radius: 50%;
   object-fit: cover;     /* center crop */
-  object-position: 60% 40%; /* move right ~10%, down ~10% (reverse previous vertical) */
+  object-position: 40% 40%; /* move right ~10%, down ~10% (reverse previous vertical) */
   animation: none !important;   /* 默认不旋转，覆盖主题样式 */
   transform: none !important;
   will-change: transform;
@@ -17,7 +17,7 @@ img[src$="/img/portrait.jpg"], img[src*="/img/portrait.jpg"] {
   height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 60% 40%;
+  object-position: 40% 40%;
   animation: none !important;
   transform: none !important;
   will-change: transform;
@@ -63,4 +63,16 @@ html body .author-info .avatar:hover img {
 .site-avatar:hover img,
 .author-info .avatar:hover img {
   animation: avatar-spin 1.2s linear infinite !important;
+}
+
+/* 最终覆盖：确保 hover 时一定旋转（包含 img 直接悬停的情况），放在文件末尾以压过上面的禁用规则 */
+html body img.site-avatar:hover,
+html body img.avatar:hover,
+html body .site-author-image:hover img,
+html body .avatar-img:hover img,
+html body .author-info .avatar:hover img,
+html body img[src$="/img/portrait.jpg"]:hover,
+html body img[src*="/img/portrait.jpg"]:hover {
+  animation: avatar-spin 1.2s linear infinite !important;
+  transition: none !important;
 }
