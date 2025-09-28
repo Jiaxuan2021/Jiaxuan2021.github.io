@@ -6,6 +6,8 @@ img.site-avatar, img.avatar, .site-author-image img, .author-info .avatar img {
   border-radius: 50%;
   object-fit: cover;     /* center crop */
   object-position: 60% 40%; /* move right ~10%, down ~10% (reverse previous vertical) */
+  animation: none !important;   /* 默认不旋转，覆盖主题样式 */
+  will-change: transform;
 }
 
 /* Fallback: target the specific file path */
@@ -15,4 +17,13 @@ img[src$="/img/portrait.jpg"], img[src*="/img/portrait.jpg"] {
   border-radius: 50%;
   object-fit: cover;
   object-position: 60% 40%;
+  animation: none !important;
+  will-change: transform;
+}
+
+/* 悬停时才旋转 */
+@keyframes avatar-spin { to { transform: rotate(360deg); } }
+img.site-avatar:hover, img.avatar:hover, .site-author-image img:hover, .author-info .avatar img:hover,
+img[src$="/img/portrait.jpg"]:hover, img[src*="/img/portrait.jpg"]:hover {
+  animation: avatar-spin 1.2s linear infinite !important;
 }
