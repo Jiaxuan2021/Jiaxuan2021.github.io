@@ -7,6 +7,7 @@ img.site-avatar, img.avatar, .site-author-image img, .author-info .avatar img {
   object-fit: cover;     /* center crop */
   object-position: 60% 40%; /* move right ~10%, down ~10% (reverse previous vertical) */
   animation: none !important;   /* 默认不旋转，覆盖主题样式 */
+  transform: none !important;
   will-change: transform;
 }
 
@@ -18,6 +19,7 @@ img[src$="/img/portrait.jpg"], img[src*="/img/portrait.jpg"] {
   object-fit: cover;
   object-position: 60% 40%;
   animation: none !important;
+  transform: none !important;
   will-change: transform;
 }
 
@@ -25,5 +27,19 @@ img[src$="/img/portrait.jpg"], img[src*="/img/portrait.jpg"] {
 @keyframes avatar-spin { to { transform: rotate(360deg); } }
 img.site-avatar:hover, img.avatar:hover, .site-author-image img:hover, .author-info .avatar img:hover,
 img[src$="/img/portrait.jpg"]:hover, img[src*="/img/portrait.jpg"]:hover {
+  animation: avatar-spin 1.2s linear infinite !important;
+}
+
+/* 更强的覆盖：如果旋转应用在容器上（而不是 img），也禁用默认旋转 */
+.site-author-image, .avatar-img, .avatar, .site-avatar {
+  animation: none !important;
+  transform: none !important;
+}
+
+/* 容器悬停时，让里面的 img 旋转（兼容主题结构） */
+.site-author-image:hover img,
+.avatar-img:hover img,
+.site-avatar:hover img,
+.author-info .avatar:hover img {
   animation: avatar-spin 1.2s linear infinite !important;
 }
