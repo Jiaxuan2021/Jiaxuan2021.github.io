@@ -5,7 +5,7 @@ img.site-avatar, img.avatar, .site-author-image img, .author-info .avatar img {
   height: 160px;
   border-radius: 50%;
   object-fit: cover;     /* center crop */
-  object-position: 40% 40%; /* move right ~10%, down ~10% (reverse previous vertical) */
+  object-position: 40% 60%; /* move view down by ~20% (y from 40% -> 60%) */
   animation: none !important;   /* 默认不旋转，覆盖主题样式 */
   transform: none !important;
   will-change: transform;
@@ -17,7 +17,7 @@ img[src$="/img/portrait.jpg"], img[src*="/img/portrait.jpg"] {
   height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 40% 40%;
+  object-position: 40% 60%;
   animation: none !important;
   transform: none !important;
   will-change: transform;
