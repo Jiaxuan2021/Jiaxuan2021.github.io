@@ -6,7 +6,10 @@ menu:
 
 # 站点基础
 index_img: /img/banner.jpg   # 可稍后放一张图到 source/img/banner.jpg
-avatar: /img/portrait.jpg     # 使用自定义头像 portrait.jpg
+# 头像配置（Butterfly 推荐写法）
+avatar:
+  img: /img/portrait.jpg      # 使用自定义头像 portrait.jpg
+  effect: true
 subtitle:
   enable: true
   text: "博士通关中"
