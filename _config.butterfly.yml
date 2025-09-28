@@ -1,0 +1,40 @@
+# 导航菜单（示例）
+menu:
+  Home: /
+  Archives: /archives/
+  About: /about/
+
+# 站点基础
+index_img: /img/banner.jpg   # 可稍后放一张图到 source/img/banner.jpg
+avatar: /img/avatar.jpg       # 可放一张头像到 source/img/avatar.jpg
+subtitle:
+  enable: true
+  text: "博士通关中"
+  effect: true
+
+# 动效/体验
+pjax: true
+lazyload:
+  enable: true
+  only: img
+copy_btn: true
+code_copy:
+  enable: true
+
+# 页脚
+footer:
+  since: 2024
+  icon: false
+
+# 搜索
+local_search:
+  enable: true
+  trigger: auto
+  top_n_per_article: 1
+  unescape: true
+
+# 文章卡片动画
+animation:
+  enable: true
+  post_list: true
+  mask: true
