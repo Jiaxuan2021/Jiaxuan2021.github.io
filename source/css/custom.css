@@ -13,7 +13,7 @@ img.site-avatar, img.avatar, .site-author-image img, .author-info .avatar img {
 }
 
 /* Fallback: target the specific file path (png) */
-img[src$="/img/portrait.png"], img[src*="/img/portrait.png"] {
+img[src$="/img/portrait.jpg"], img[src*="/img/portrait.jpg"] {
   width: 100% !important;
   height: 100% !important;
   border-radius: 50%;
@@ -28,7 +28,7 @@ img[src$="/img/portrait.png"], img[src*="/img/portrait.png"] {
 /* 悬停时才旋转 */
 @keyframes avatar-spin { to { transform: rotate(360deg); } }
 img.site-avatar:hover, img.avatar:hover, .site-author-image img:hover, .author-info .avatar img:hover,
-img[src$="/img/portrait.png"]:hover, img[src*="/img/portrait.png"]:hover {
+img[src$="/img/portrait.jpg"]:hover, img[src*="/img/portrait.jpg"]:hover {
   animation: avatar-spin 1.2s linear infinite !important;
 }
 
