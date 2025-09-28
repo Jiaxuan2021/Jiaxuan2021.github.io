@@ -1,0 +1,18 @@
+/* Force the avatar image to render as a centered circle */
+/* Try common theme avatar selectors first */
+img.site-avatar, img.avatar, .site-author-image img, .author-info .avatar img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;     /* center crop */
+  object-position: center;
+}
+
+/* Fallback: target the specific file path */
+img[src$="/img/portrait.jpg"], img[src*="/img/portrait.jpg"] {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}

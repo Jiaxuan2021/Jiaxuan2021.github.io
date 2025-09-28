@@ -6,7 +6,7 @@ menu:
 
 # 站点基础
 index_img: /img/banner.jpg   # 可稍后放一张图到 source/img/banner.jpg
-avatar: /img/avatar.jpg       # 可放一张头像到 source/img/avatar.jpg
+avatar: /img/portrait.jpg     # 使用自定义头像 portrait.jpg
 subtitle:
   enable: true
   text: "博士通关中"
@@ -20,6 +20,14 @@ lazyload:
 copy_btn: true
 code_copy:
   enable: true
+
+# 站点图标与自定义注入
+# 通过 inject 在 <head> 中注入 favicon 与自定义样式
+inject:
+  head:
+    - <link rel="icon" href="/img/yaziduck.png" type="image/png">
+    - <link rel="apple-touch-icon" href="/img/yaziduck.png">
+    - <link rel="stylesheet" href="/css/custom.css">
 
 # 页脚
 footer:
