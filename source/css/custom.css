@@ -4,29 +4,33 @@ img.site-avatar, img.avatar, .site-author-image img, .author-info .avatar img {
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  object-fit: cover;     /* center crop */
-  object-position: 60% 50%; /* move view down by ~20% (y from 30% -> 50%) */
+  object-fit: cover;            /* center crop */
+  object-position: center center; /* center visible area */
   animation: none !important;   /* 默认不旋转，覆盖主题样式 */
   transform: none !important;
   will-change: transform;
+  display: block;               /* center horizontally */
+  margin: 0 auto;
 }
 
-/* Fallback: target the specific file path */
-img[src$="/img/portrait.jpg"], img[src*="/img/portrait.jpg"] {
+/* Fallback: target the specific file path (png) */
+img[src$="/img/portrait.png"], img[src*="/img/portrait.png"] {
   width: 160px;
   height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 60% 50%;
+  object-position: center center;
   animation: none !important;
   transform: none !important;
   will-change: transform;
+  display: block;
+  margin: 0 auto;
 }
 
 /* 悬停时才旋转 */
 @keyframes avatar-spin { to { transform: rotate(360deg); } }
 img.site-avatar:hover, img.avatar:hover, .site-author-image img:hover, .author-info .avatar img:hover,
-img[src$="/img/portrait.jpg"]:hover, img[src*="/img/portrait.jpg"]:hover {
+img[src$="/img/portrait.png"]:hover, img[src*="/img/portrait.png"]:hover {
   animation: avatar-spin 1.2s linear infinite !important;
 }
 
@@ -71,8 +75,8 @@ html body img.avatar:hover,
 html body .site-author-image:hover img,
 html body .avatar-img:hover img,
 html body .author-info .avatar:hover img,
-html body img[src$="/img/portrait.jpg"]:hover,
-html body img[src*="/img/portrait.jpg"]:hover {
+html body img[src$="/img/portrait.png"]:hover,
+html body img[src*="/img/portrait.png"]:hover {
   animation: avatar-spin 1.2s linear infinite !important;
   transition: none !important;
 }

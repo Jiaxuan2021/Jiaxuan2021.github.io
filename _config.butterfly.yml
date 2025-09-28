@@ -8,8 +8,8 @@ menu:
 index_img: /img/banner.jpg   # 可稍后放一张图到 source/img/banner.jpg
 # 头像配置（Butterfly 推荐写法）
 avatar:
-  img: /img/portrait.jpg      # 使用自定义头像 portrait.jpg
-  effect: false               # 关闭主题自带的持续旋转效果
+  img: /img/portrait.png      # 使用自定义头像 portrait.png
+  effect: false               # 默认不旋转（仅 hover 时旋转）
 subtitle:
   enable: true
   text: "博士通关中"
