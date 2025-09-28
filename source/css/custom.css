@@ -5,7 +5,7 @@ img.site-avatar, img.avatar, .site-author-image img, .author-info .avatar img {
   height: 100% !important;
   border-radius: 50%;
   object-fit: cover;            /* center crop */
-  object-position: 50% 60%; /* move image up ~10% from center (show a bit lower area) */
+  object-position: 50% 52%; /* move image up ~10% from center (show a bit lower area) */
   animation: none !important;   /* 默认不旋转，覆盖主题样式 */
   transform: none !important;
   will-change: transform;
@@ -18,7 +18,7 @@ img[src$="/img/portrait.jpg"], img[src*="/img/portrait.jpg"] {
   height: 100% !important;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 50% 60%;
+  object-position: 50% 52%;
   animation: none !important;
   transform: none !important;
   will-change: transform;
@@ -50,8 +50,8 @@ html body img.avatar {
 html body .avatar-img,
 html body .site-author-image,
 html body .author-info .avatar {
-  width: 120px !important;   /* adjust avatar size here */
-  height: 120px !important;
+  width: 140px !important;   /* adjust avatar size here */
+  height: 140px !important;
   margin: 0 auto;
 }
 
@@ -84,6 +84,26 @@ html body .avatar-img:hover img,
 html body .author-info .avatar:hover img,
 html body img[src$="/img/portrait.png"]:hover,
 html body img[src*="/img/portrait.png"]:hover {
+  animation: avatar-spin 1.2s linear infinite !important;
+  transition: none !important;
+}
+
+/* Explicit fallback rules for portrait.png to match portrait.jpg settings */
+img[src$="/img/portrait.png"], img[src*="/img/portrait.png"] {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 52%;
+  animation: none !important;
+  transform: none !important;
+  will-change: transform;
+  display: block;
+}
+
+/* Unified hover rule for both jpg & png */
+img[src$="/img/portrait.jpg"]:hover, img[src*="/img/portrait.jpg"]:hover,
+img[src$="/img/portrait.png"]:hover, img[src*="/img/portrait.png"]:hover {
   animation: avatar-spin 1.2s linear infinite !important;
   transition: none !important;
 }
