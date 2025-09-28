@@ -5,7 +5,7 @@ img.site-avatar, img.avatar, .site-author-image img, .author-info .avatar img {
   height: 160px;
   border-radius: 50%;
   object-fit: cover;     /* center crop */
-  object-position: center 60%; /* shift visible area down by ~10% */
+  object-position: 60% 40%; /* move right ~10%, down ~10% (reverse previous vertical) */
 }
 
 /* Fallback: target the specific file path */
@@ -14,5 +14,5 @@ img[src$="/img/portrait.jpg"], img[src*="/img/portrait.jpg"] {
   height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  object-position: center 60%;
+  object-position: 60% 40%;
 }
