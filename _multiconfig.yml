@@ -173,6 +173,8 @@ inject:
 footer:
   since: 2024
   icon: false
+  copyright:
+    enable: false
 local_search:
   enable: true
   trigger: auto

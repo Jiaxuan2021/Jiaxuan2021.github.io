@@ -95,3 +95,16 @@ animation:
   enable: true
   post_list: true
   mask: true
+
+aside:
+  enable: true
+  # 侧边栏公告卡片
+  card_announcement:
+    enable: true
+    # 支持纯文本或 HTML，可写多行
+    content: |
+      欢迎来到本站！🎉<br>
+      - 近期更新：新增两篇博文；<br>
+      - 联系方式：xxx@xxx.com
+    # 可选：是否默认折叠
+    hide: false
