@@ -43,7 +43,7 @@ img[src*="/img/portrait.png"] {
   html body .author-info .avatar:hover img,
   html body img[src$="/img/portrait.jpg"]:hover,
   html body img[src*="/img/portrait.jpg"]:hover {
-    animation: avatar-rot 1.2s linear infinite !important;
+    animation: avatar-rot 2s linear infinite !important;
   }
 }
 
