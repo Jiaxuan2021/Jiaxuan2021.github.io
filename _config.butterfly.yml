@@ -9,7 +9,7 @@ index_img: /img/banner.jpg   # 可稍后放一张图到 source/img/banner.jpg
 # 头像配置（Butterfly 推荐写法）
 avatar:
   img: /img/portrait.jpg?v=3  # 使用 jpg 并更新版本参数防缓存
-  effect: true   # 启用主题自带头像效果
+  effect: false  # 关闭默认旋转，改为仅悬停旋转
 subtitle:
   enable: true
   text: "博士通关中"
