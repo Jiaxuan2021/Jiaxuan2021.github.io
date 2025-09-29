@@ -77,9 +77,9 @@ inject:
           function ensureAv(cb){ if(window.AV && AV.init){ cb(); return; } console.error('LeanCloud SDK not loaded'); }
           function normPath(){ var p = location.pathname; if (p.endsWith('index.html')) p = p.replace(/index\.html$/, '/'); if (!p.endsWith('/')) p += '/'; return p; }
           function updateEl(id, val){ var el=document.getElementById(id); if(el){ el.textContent = fmt(val); } }
-          function incSitePV(AV){ var Q = new AV.Query('Site'); Q.equalTo('name','global'); return Q.first().then(function(obj){ if(!obj){ obj = new AV.Object('Site'); obj.set('name','global'); obj.set('pv',0); obj.set('uv',0); } obj.increment('pv',1); return obj.save().then(function(saved){ return saved.get('pv'); }); }); }
-          function incSiteUV(AV){ var key='LC_UV_'+todayKey(); if(sessionStorage.getItem(key)){ return Promise.resolve(null); } sessionStorage.setItem(key,'1'); var Q = new AV.Query('Site'); Q.equalTo('name','global'); return Q.first().then(function(obj){ if(!obj){ obj = new AV.Object('Site'); obj.set('name','global'); obj.set('pv',0); obj.set('uv',0); } obj.increment('uv',1); return obj.save().then(function(saved){ return saved.get('uv'); }); }); }
-          function incPagePV(AV){ var url = normPath(); var Q = new AV.Query('Counter'); Q.equalTo('url', url); return Q.first().then(function(obj){ if(!obj){ obj = new AV.Object('Counter'); obj.set('url', url); obj.set('title', document.title || url); obj.set('time',0); } obj.increment('time',1); return obj.save().then(function(saved){ return saved.get('time'); }); }); }
+          function incSitePV(AV){ var Q = new AV.Query('Site'); Q.equalTo('name','global'); return Q.first().catch(function(){return null;}).then(function(obj){ if(!obj){ obj = new AV.Object('Site'); obj.set('name','global'); obj.set('pv',0); obj.set('uv',0); } obj.increment('pv',1); return obj.save().then(function(saved){ return saved.get('pv'); }); }); }
+          function incSiteUV(AV){ var key='LC_UV_'+todayKey(); if(sessionStorage.getItem(key)){ return Promise.resolve(null); } sessionStorage.setItem(key,'1'); var Q = new AV.Query('Site'); Q.equalTo('name','global'); return Q.first().catch(function(){return null;}).then(function(obj){ if(!obj){ obj = new AV.Object('Site'); obj.set('name','global'); obj.set('pv',0); obj.set('uv',0); } obj.increment('uv',1); return obj.save().then(function(saved){ return saved.get('uv'); }); }); }
+          function incPagePV(AV){ var url = normPath(); var Q = new AV.Query('Counter'); Q.equalTo('url', url); return Q.first().catch(function(){return null;}).then(function(obj){ if(!obj){ obj = new AV.Object('Counter'); obj.set('url', url); obj.set('title', document.title || url); obj.set('time',0); } obj.increment('time',1); return obj.save().then(function(saved){ return saved.get('time'); }); }); }
           onReady(function(){ ensureAv(function(){ try{ AV.init({ appId: APP_ID, appKey: APP_KEY, serverURL: SERVER_URL }); }catch(e){ console.error(e); return; } incSitePV(AV).then(function(pv){ if(pv!=null) updateEl('busuanzi_value_site_pv', pv); }).catch(console.error); incSiteUV(AV).then(function(uv){ if(uv!=null) updateEl('busuanzi_value_site_uv', uv); }).catch(console.error); incPagePV(AV).then(function(ppv){ if(ppv!=null) updateEl('busuanzi_value_page_pv', ppv); }).catch(console.error); }); });
           document.addEventListener('pjax:complete', function(){ onReady(function(){ ensureAv(function(){ incSitePV(AV).then(function(pv){ if(pv!=null) updateEl('busuanzi_value_site_pv', pv); }).catch(console.error); incPagePV(AV).then(function(ppv){ if(ppv!=null) updateEl('busuanzi_value_page_pv', ppv); }).catch(console.error); }); }); });
         })();
@@ -107,9 +107,9 @@ footer:
 # 访问统计
 # 关闭不蒜子（Butterfly 5.5.0 用三个开关控制）
 busuanzi:
-  site_uv: false
-  site_pv: false
-  page_pv: false
+  site_uv: true
+  site_pv: true
+  page_pv: true
 
 # 使用 LeanCloud 统计 PV/UV（Butterfly 的常见配置写法，若你的主题版本采用不同字段名，也能忽略不影响）
 # 写法一：部分版本使用 pageview + leancloud 段落

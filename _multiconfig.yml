@@ -101,6 +101,9 @@ inject:
     - <link rel="apple-touch-icon" href="/img/yaziduck.png?v=2">
     - <link rel="stylesheet" href="/css/custom.css?v=4">
     - <script defer src="/js/site-effects.js?v=5"></script>
+    - >-
+      <script
+      src="https://cdn.jsdelivr.net/npm/leancloud-storage@4/dist/av-min.js"></script>
   bottom:
     - >-
       <script> (function(){"use strict";const
@@ -164,6 +167,26 @@ inject:
         @keyframes footer-duck-walk { 0% { transform: translateX(-10vw); opacity: 0; } 5% { opacity: 1; } 95% { transform: translateX(110vw); opacity: 1; } 100% { transform: translateX(110vw); opacity: 0; } }
       </style>
     - |
+      <script>
+        (function(){
+          'use strict';
+          var APP_ID = 'WgmQRFC1HEneq1k1Ptv6YRa7-MdYXbMMI';
+          var APP_KEY = '23rJvxEYMEPpBst23zagP4sO';
+          var SERVER_URL = 'https://wgmqrfc1.api.lncldglobal.com';
+          function todayKey(){ var d=new Date(),m=d.getMonth()+1,dd=d.getDate(); return d.getFullYear()+'-'+(m<10?'0'+m:m)+'-'+(dd<10?'0'+dd:dd); }
+          function fmt(n){ try{ n=Number(n)||0; return n.toLocaleString(); }catch(e){ return String(n); } }
+          function onReady(fn){ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', fn, {once:true}); } else { fn(); } }
+          function ensureAv(cb){ if(window.AV && AV.init){ cb(); return; } console.error('LeanCloud SDK not loaded'); }
+          function normPath(){ var p = location.pathname; if (p.endsWith('index.html')) p = p.replace(/index\.html$/, '/'); if (!p.endsWith('/')) p += '/'; return p; }
+          function updateEl(id, val){ var el=document.getElementById(id); if(el){ el.textContent = fmt(val); } }
+          function incSitePV(AV){ var Q = new AV.Query('Site'); Q.equalTo('name','global'); return Q.first().then(function(obj){ if(!obj){ obj = new AV.Object('Site'); obj.set('name','global'); obj.set('pv',0); obj.set('uv',0); } obj.increment('pv',1); return obj.save().then(function(saved){ return saved.get('pv'); }); }); }
+          function incSiteUV(AV){ var key='LC_UV_'+todayKey(); if(sessionStorage.getItem(key)){ return Promise.resolve(null); } sessionStorage.setItem(key,'1'); var Q = new AV.Query('Site'); Q.equalTo('name','global'); return Q.first().then(function(obj){ if(!obj){ obj = new AV.Object('Site'); obj.set('name','global'); obj.set('pv',0); obj.set('uv',0); } obj.increment('uv',1); return obj.save().then(function(saved){ return saved.get('uv'); }); }); }
+          function incPagePV(AV){ var url = normPath(); var Q = new AV.Query('Counter'); Q.equalTo('url', url); return Q.first().then(function(obj){ if(!obj){ obj = new AV.Object('Counter'); obj.set('url', url); obj.set('title', document.title || url); obj.set('time',0); } obj.increment('time',1); return obj.save().then(function(saved){ return saved.get('time'); }); }); }
+          onReady(function(){ ensureAv(function(){ try{ AV.init({ appId: APP_ID, appKey: APP_KEY, serverURL: SERVER_URL }); }catch(e){ console.error(e); return; } incSitePV(AV).then(function(pv){ if(pv!=null) updateEl('busuanzi_value_site_pv', pv); }).catch(console.error); incSiteUV(AV).then(function(uv){ if(uv!=null) updateEl('busuanzi_value_site_uv', uv); }).catch(console.error); incPagePV(AV).then(function(ppv){ if(ppv!=null) updateEl('busuanzi_value_page_pv', ppv); }).catch(console.error); }); });
+          document.addEventListener('pjax:complete', function(){ onReady(function(){ ensureAv(function(){ incSitePV(AV).then(function(pv){ if(pv!=null) updateEl('busuanzi_value_site_pv', pv); }).catch(console.error); incPagePV(AV).then(function(ppv){ if(ppv!=null) updateEl('busuanzi_value_page_pv', ppv); }).catch(console.error); }); }); });
+        })();
+      </script>
+    - |
       <style>
         footer#footer, #footer, footer.footer, .footer, .footer-other, #footer .footer-bar, #footer .footer-wrap {
           background: #0f2e5e !important;
@@ -181,7 +204,9 @@ footer:
   copyright:
     enable: false
 busuanzi:
-  enable: false
+  site_uv: false
+  site_pv: false
+  page_pv: false
 pageview:
   enable: true
   source: leancloud
