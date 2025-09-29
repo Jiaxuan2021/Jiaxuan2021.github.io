@@ -15,9 +15,42 @@
   const DUCK_SRC_PRIMARY = '/img/miao.png';
   const DUCK_SRC_FALLBACK = '/img/yaziduck.png';
   const CLOUD_LAYER_ID = 'clouds-layer';
+  const CLOUD_PRIMARY = '/img/cloud.png'; // optional user-provided
+  // Soft cloud SVG fallback (blurred multi-circle)
+  const CLOUD_FALLBACK = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="240" height="140" viewBox="0 0 240 140">\
+      <defs>\
+        <filter id="b" x="-20%" y="-20%" width="140%" height="140%">\
+          <feGaussianBlur stdDeviation="3.5"/>\
+        </filter>\
+      </defs>\
+      <g filter="url(#b)" fill="#fff" fill-opacity="0.95">\
+        <circle cx="70" cy="75" r="38"/>\
+        <circle cx="100" cy="60" r="46"/>\
+        <circle cx="135" cy="78" r="40"/>\
+        <ellipse cx="110" cy="90" rx="78" ry="28"/>\
+      </g>\
+    </svg>'
+  );
+  let cloudImageSrc = CLOUD_FALLBACK;
+
+  // Try to use user-provided cloud image if available
+  (function preloadCloud() {
+    const test = new Image();
+    test.onload = function () {
+      if (test.naturalWidth > 0) {
+        cloudImageSrc = CLOUD_PRIMARY;
+        // If already on home and clouds exist, rebuild to use the image
+        if (document.getElementById(CLOUD_LAYER_ID)) {
+          setupCloudsForHome();
+        }
+      }
+    };
+    test.onerror = function () { /* keep fallback */ };
+    test.src = CLOUD_PRIMARY;
+  })();
 
   function isHome() {
-    // Common checks for home route
     if (location.pathname === '/' || location.pathname === '') return true;
     if (document.body && (document.body.classList.contains('home') || document.body.classList.contains('index'))) return true;
     return false;
@@ -29,23 +62,22 @@
   }
 
   function spawnClouds() {
-    // Create a fixed layer for clouds
     const layer = document.createElement('div');
     layer.id = CLOUD_LAYER_ID;
     layer.className = 'clouds-layer';
 
-    const cloudCount = 7; // number of clouds
+    const cloudCount = 7;
     for (let i = 0; i < cloudCount; i++) {
       const c = document.createElement('div');
       c.className = 'cloud';
 
-      // Randomize vertical position, size, speed, opacity, and initial offset
-      const topVh = 8 + Math.random() * 36;             // 8–44vh
-      const widthPx = 160 + Math.random() * 240;        // 160–400px
-      const heightPx = widthPx * 0.5;                   // keep aspect ratio
-      const duration = 40 + Math.random() * 50;         // 40–90s
+      // Randomize near the top band
+      const topVh = 2 + Math.random() * 14;             // 2–16vh (near top)
+      const widthPx = 120 + Math.random() * 200;        // 120–320px
+      const heightPx = widthPx * 0.55;                  // aspect
+      const duration = 50 + Math.random() * 70;         // 50–120s
       const delay = -Math.random() * duration;          // negative to stagger
-      const opacity = 0.18 + Math.random() * 0.2;       // 0.18–0.38
+      const opacity = 0.12 + Math.random() * 0.23;      // 0.12–0.35
 
       c.style.top = topVh + 'vh';
       c.style.width = widthPx + 'px';
@@ -53,10 +85,10 @@
       c.style.opacity = String(opacity);
       c.style.animationDuration = duration + 's';
       c.style.animationDelay = delay + 's';
+      c.style.backgroundImage = 'url("' + cloudImageSrc + '")';
 
       layer.appendChild(c);
     }
-
     document.body.appendChild(layer);
   }
 
@@ -71,18 +103,12 @@
 
     document.addEventListener('click', function (e) {
       try {
-        // Left button only
-        if (e.button !== 0) return;
-
-        // Ignore interactive elements
+        if (e.button !== 0) return; // left only
         const interactive = e.target.closest('a, button, input, textarea, select, label, summary, details, code, pre, .no-duck');
         if (interactive) return;
-
-        // Ignore if selecting text
         const sel = window.getSelection && String(window.getSelection()) || '';
         if (sel.trim()) return;
 
-        // Create duck image at click point
         const img = document.createElement('img');
         img.src = DUCK_SRC_PRIMARY;
         img.alt = 'duck';
@@ -90,15 +116,13 @@
         img.style.left = (e.clientX) + 'px';
         img.style.top = (e.clientY) + 'px';
         img.style.setProperty('--fall-rotate', ((Math.random() * 40) - 20) + 'deg');
-        img.width = 64; // hint layout
-        img.height = 64;
+        img.width = 32; // half size
+        img.height = 32;
         img.onerror = function () { this.onerror = null; this.src = DUCK_SRC_FALLBACK; };
 
         document.body.appendChild(img);
         img.addEventListener('animationend', function () { img.remove(); });
-      } catch (_) {
-        // fail-safe: ignore
-      }
+      } catch (_) { /* ignore */ }
     }, false);
   }
 
@@ -107,13 +131,9 @@
     else fn();
   }
 
-  // Initial load
   onReady(function () {
     setupCloudsForHome();
     installDuckDropOnce();
   });
-
-  // Re-run after PJAX navigation
   document.addEventListener('pjax:complete', setupCloudsForHome);
 })();
-

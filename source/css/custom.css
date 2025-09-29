@@ -56,21 +56,18 @@ img[src*="/img/portrait.png"] {
   overflow: hidden;
 }
 
-/* Single cloud puff assembled by shadows */
+/* Single cloud image (set by JS via background-image) */
 .cloud {
   position: absolute;
-  top: 10vh;
+  top: 4vh;                /* JS will randomize to a small band near top */
   left: -20vw;
-  width: 240px;
+  width: 220px;
   height: 120px;
-  background: #fff;
-  opacity: .25;
-  border-radius: 100px;
-  filter: blur(.5px);
-  box-shadow:
-    -40px 10px 0 10px #fff,
-    20px 5px 0 14px #fff,
-    60px 15px 0 10px #fff;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  opacity: .28;            /* JS will randomize */
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.04));
   animation-name: cloud-drift;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
@@ -86,7 +83,7 @@ img[src*="/img/portrait.png"] {
   position: fixed;
   left: 0; top: 0;
   transform: translate(-50%, -50%);
-  width: 64px; height: auto;
+  width: 32px; height: auto;   /* half size */
   z-index: 9999;
   pointer-events: none;
   will-change: transform, opacity;
