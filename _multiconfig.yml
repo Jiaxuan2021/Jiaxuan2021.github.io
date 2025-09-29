@@ -75,6 +75,11 @@ feed:
   type: atom
   path: atom.xml
   limit: 20
+leancloud_counter_security:
+  enable_sync: true
+  app_id: WgmQRFC1HEneq1k1Ptv6YRa7-MdYXbMMI
+  app_key: 23rJvxEYMEPpBst23zagP4sO
+  server_url: https://wgmqrfc1.api.lncldglobal.com
 menu:
   Home: /
   Archives: /archives/
@@ -175,6 +180,23 @@ footer:
   icon: false
   copyright:
     enable: false
+busuanzi:
+  enable: false
+pageview:
+  enable: true
+  source: leancloud
+leancloud:
+  app_id: WgmQRFC1HEneq1k1Ptv6YRa7-MdYXbMMI
+  app_key: 23rJvxEYMEPpBst23zagP4sO
+  server_url: https://wgmqrfc1.api.lncldglobal.com
+leancloud_visitors:
+  enable: true
+  app_id: WgmQRFC1HEneq1k1Ptv6YRa7-MdYXbMMI
+  app_key: 23rJvxEYMEPpBst23zagP4sO
+  server_url: https://wgmqrfc1.api.lncldglobal.com
+  site_pv: true
+  site_uv: true
+  page_pv: true
 local_search:
   enable: true
   trigger: auto
@@ -191,5 +213,6 @@ aside:
     content: |
       欢迎来到本站！🎉<br>
       - 近期更新：新增两篇博文；<br>
-      - 联系方式：xxx@xxx.com
+      - 联系方式：liu_jiaxuan2021@163.com
+      - 框架 Hexo 8.0.0，主题 Butterfly 5.5.0
     hide: false
