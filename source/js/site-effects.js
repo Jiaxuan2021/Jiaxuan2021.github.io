@@ -12,6 +12,7 @@
 */
 
 (function () {
+  try { window.__siteEffectsVersion = '20250929-2'; console.log('site-effects loaded', window.__siteEffectsVersion); } catch(_){}
   const DUCK_SRC_PRIMARY = '/img/miao.png';
   const DUCK_SRC_FALLBACK = '/img/yaziduck.png';
   const CLOUD_LAYER_ID = 'clouds-layer';
@@ -67,6 +68,27 @@
     layer.id = CLOUD_LAYER_ID;
     layer.className = 'clouds-layer';
 
+    // Attach to banner if present so clouds don't float over posts on scroll
+    const banner = document.querySelector('#banner') || document.querySelector('#page-header') || document.querySelector('.cover') || document.querySelector('.index-banner');
+    if (banner) {
+      layer.style.position = 'absolute';
+      layer.style.inset = '0';
+      layer.style.pointerEvents = 'none';
+      layer.style.overflow = 'hidden';
+      banner.style.position = banner.style.position || 'relative';
+      banner.appendChild(layer);
+    } else {
+      // Fallback to top-fixed limited height
+      layer.style.position = 'fixed';
+      layer.style.top = '0';
+      layer.style.left = '0';
+      layer.style.right = '0';
+      layer.style.height = '40vh';
+      layer.style.pointerEvents = 'none';
+      layer.style.overflow = 'hidden';
+      document.body.appendChild(layer);
+    }
+
     const cloudCount = 5; // reduce density
     const usedBands = [];
     const minGapVh = 8; // avoid vertical overlaps
@@ -98,7 +120,7 @@
 
       layer.appendChild(c);
     }
-    document.body.appendChild(layer);
+    // layer appended above
   }
 
   function setupCloudsForHome() {

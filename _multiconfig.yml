@@ -92,10 +92,10 @@ code_copy:
   enable: true
 inject:
   head:
-    - <link rel="icon" href="/img/yaziduck.png" type="image/png">
-    - <link rel="apple-touch-icon" href="/img/yaziduck.png">
-    - <link rel="stylesheet" href="/css/custom.css">
-    - <script defer src="/js/site-effects.js"></script>
+    - <link rel="icon" href="/img/yaziduck.png?v=2" type="image/png">
+    - <link rel="apple-touch-icon" href="/img/yaziduck.png?v=2">
+    - <link rel="stylesheet" href="/css/custom.css?v=4">
+    - <script defer src="/js/site-effects.js?v=5"></script>
   bottom:
     - >-
       <script> (function(){"use strict";const
