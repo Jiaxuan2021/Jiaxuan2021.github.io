@@ -124,6 +124,40 @@ inject:
       d=document.createElement("img");d.src=e,d.alt="duck",d.className="duck-drop",d.style.left=n.clientX+"px",d.style.top=n.clientY+"px",d.style.setProperty("--fall-rotate",(40*Math.random()-20)+"deg"),d.width=32,d.height=32,d.onerror=function(){this.onerror=null,this.src=t},document.body.appendChild(d),d.addEventListener("animationend",(function(){d.remove()}))}catch(e){}},!1))}function
       u(e){"loading"===document.readyState?document.addEventListener("DOMContentLoaded",e,{once:!0}):e()}u((function(){d(),r()})),document.addEventListener("pjax:complete",d);})();
       </script>
+    - >-
+      <script> (function(){"use strict";function n(){var
+      n=document.getElementById("footer")||document.querySelector(".footer-other")||document.querySelector(".footer");if(!n)return;var
+      e=n.querySelector(".footer-duck-layer");e?(e.innerHTML=""):((e=document.createElement("div")).className="footer-duck-layer",e.style.position="absolute",e.style.inset="0",e.style.pointerEvents="none",n.appendChild(e));!function
+      n(e){var
+      t=document.createElement("img");t.className="footer-duck",t.src="/img/miao.png",t.alt="duck",t.onerror=function(){this.onerror=null,this.src="/img/yaziduck.png"};var
+      o=22+(4*Math.random()-2);t.style.setProperty("--footer-duck-duration",o.toFixed(1)+"s"),e.appendChild(t),t.addEventListener("animationend",(function(){t.remove(),n(e)}))}(e)}function
+      e(n){"loading"===document.readyState?document.addEventListener("DOMContentLoaded",n,{once:!0}):n()}e(n),document.addEventListener("pjax:complete",n);}());
+      </script>
+    - |
+      <style>
+        /* Footer softer color scheme */
+        footer#footer, #footer, footer.footer, .footer, .footer-other, #footer .footer-bar, #footer .footer-wrap {
+          background: #f5f8ff !important;
+          color: #1f2740 !important;
+        }
+        #footer a, .footer a, .footer-other a { color: #1e4b8f !important; }
+        #footer a:hover, .footer a:hover, .footer-other a:hover { color: #11386b !important; }
+        .footer-other { padding: 6px 0 !important; min-height: 38px !important; }
+        #footer .footer-wrap { padding-top: 6px !important; padding-bottom: 6px !important; }
+        footer#footer, #footer, footer.footer, .footer, .footer-other { position: relative !important; overflow: visible !important; }
+
+        /* Right-side progress to light gray-white */
+        #rightside .progress, #rightside .progress span, #rightside .bar, .rightside .progress, .rightside .bar { background-color: #e9edf3 !important; }
+        #rightside svg circle { stroke: #e9edf3 !important; }
+        #rightside svg circle.progress, #rightside svg .progress { stroke: #cfd6df !important; }
+        #progress-bar, .progressbar { background-color: #e9edf3 !important; }
+        #progress-bar .bar, .progressbar .bar { background-color: #cfd6df !important; }
+
+        /* Walking duck */
+        .footer-duck { position: absolute; bottom: 8px; left: 0; width: 28px; height: auto; pointer-events: none; z-index: 3;
+          animation: footer-duck-walk var(--footer-duck-duration, 22s) linear 1 forwards; transform: translateX(-10vw); }
+        @keyframes footer-duck-walk { 0% { transform: translateX(-10vw); opacity: 0; } 5% { opacity: 1; } 95% { transform: translateX(110vw); opacity: 1; } 100% { transform: translateX(110vw); opacity: 0; } }
+      </style>
     - |
       <style>
         footer#footer, #footer, footer.footer, .footer, .footer-other, #footer .footer-bar, #footer .footer-wrap {

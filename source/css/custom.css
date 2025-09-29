@@ -50,7 +50,8 @@ img[src*="/img/portrait.png"] {
 /* --- Clouds on Home Banner --- */
 .clouds-layer {
   position: fixed;
-  inset: 0;
+  top: 0; left: 0; right: 0;
+  height: 40vh;              /* limit to top area only */
   z-index: 2;              /* above banner, below UI overlays */
   pointer-events: none;    /* do not block clicks */
   overflow: hidden;

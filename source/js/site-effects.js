@@ -67,16 +67,24 @@
     layer.id = CLOUD_LAYER_ID;
     layer.className = 'clouds-layer';
 
-    const cloudCount = 7;
+    const cloudCount = 5; // reduce density
+    const usedBands = [];
+    const minGapVh = 8; // avoid vertical overlaps
     for (let i = 0; i < cloudCount; i++) {
       const c = document.createElement('div');
       c.className = 'cloud';
 
       // Randomize near the top band
-      const topVh = 2 + Math.random() * 14;             // 2–16vh (near top)
+      let attempts = 0;
+      let topVh = 2 + Math.random() * 14;             // 2–16vh (near top)
+      while (attempts < 12 && usedBands.some(v => Math.abs(v - topVh) < minGapVh)) {
+        topVh = 2 + Math.random() * 14;
+        attempts++;
+      }
+      usedBands.push(topVh);
       const widthPx = 120 + Math.random() * 200;        // 120–320px
       const heightPx = widthPx * 0.55;                  // aspect
-      const duration = 50 + Math.random() * 70;         // 50–120s
+      const duration = 60 + Math.random() * 90;         // 60–150s
       const delay = -Math.random() * duration;          // negative to stagger
       const opacity = 0.4 + Math.random() * 0.3;        // 0.4–0.7 (less transparent overall)
 
@@ -112,7 +120,8 @@
     container.appendChild(img);
     img.addEventListener('animationend', function () {
       img.remove();
-      setTimeout(() => spawnFooterDuckOnce(container), 1000); // wait 1s then restart
+      // Immediately start next loop without waiting
+      spawnFooterDuckOnce(container);
     });
   }
 

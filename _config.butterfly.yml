@@ -35,6 +35,34 @@ inject:
     - <script>
         (function(){"use strict";const e="/img/miao.png",t="/img/yaziduck.png",n="clouds-layer",o="/img/cloud.png",i="data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="260" height="150" viewBox="0 0 260 150"><defs><filter id="b" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter></defs><g filter="url(#b)" fill="#fff" fill-opacity="0.98"><circle cx="70" cy="78" r="42"/><circle cx="105" cy="60" r="52"/><circle cx="145" cy="80" r="46"/><circle cx="178" cy="72" r="36"/><ellipse cx="120" cy="96" rx="90" ry="30"/></g></svg>');let a=i;!function(){const e=new Image;e.onload=function(){e.naturalWidth>0&&(a=o,document.getElementById(n)&&d())},e.onerror=function(){},e.src=o}();function c(){return"/"===location.pathname||""===location.pathname||document.body&&(document.body.classList.contains("home")||document.body.classList.contains("index"))}function l(){const e=document.getElementById(n);e&&e.parentNode&&e.parentNode.removeChild(e)}function s(){const e=document.createElement("div");e.id=n,e.className="clouds-layer";for(let t=0;t<7;t++){const t=document.createElement("div");t.className="cloud";const n=2+14*Math.random(),o=120+200*Math.random(),i=.55*o,c=50+70*Math.random(),s=-Math.random()*c,r=.25+.2*Math.random();t.style.top=n+"vh",t.style.width=o+"px",t.style.height=i+"px",t.style.opacity=String(r),t.style.animationDuration=c+"s",t.style.animationDelay=s+"s",t.style.backgroundImage='url("'+a+'")',e.appendChild(t)}document.body.appendChild(e)}function d(){l(),c()&&s()}function r(){window.__duckClickInstalled||(window.__duckClickInstalled=!0,document.addEventListener("click",(function(n){try{if(0!==n.button)return;const o=n.target.closest("a, button, input, textarea, select, label, summary, details, code, pre, .no-duck");if(o)return;const i=window.getSelection&&String(window.getSelection())||"";if(i.trim())return;const d=document.createElement("img");d.src=e,d.alt="duck",d.className="duck-drop",d.style.left=n.clientX+"px",d.style.top=n.clientY+"px",d.style.setProperty("--fall-rotate",(40*Math.random()-20)+"deg"),d.width=32,d.height=32,d.onerror=function(){this.onerror=null,this.src=t},document.body.appendChild(d),d.addEventListener("animationend",(function(){d.remove()}))}catch(e){}},!1))}function u(e){"loading"===document.readyState?document.addEventListener("DOMContentLoaded",e,{once:!0}):e()}u((function(){d(),r()})),document.addEventListener("pjax:complete",d);})();
       </script>
+    - <script>
+        (function(){"use strict";function n(){var n=document.getElementById("footer")||document.querySelector(".footer-other")||document.querySelector(".footer");if(!n)return;var e=n.querySelector(".footer-duck-layer");e?(e.innerHTML=""):((e=document.createElement("div")).className="footer-duck-layer",e.style.position="absolute",e.style.inset="0",e.style.pointerEvents="none",n.appendChild(e));!function n(e){var t=document.createElement("img");t.className="footer-duck",t.src="/img/miao.png",t.alt="duck",t.onerror=function(){this.onerror=null,this.src="/img/yaziduck.png"};var o=22+(4*Math.random()-2);t.style.setProperty("--footer-duck-duration",o.toFixed(1)+"s"),e.appendChild(t),t.addEventListener("animationend",(function(){t.remove(),n(e)}))}(e)}function e(n){"loading"===document.readyState?document.addEventListener("DOMContentLoaded",n,{once:!0}):n()}e(n),document.addEventListener("pjax:complete",n);}());
+      </script>
+    - |
+      <style>
+        /* Footer softer color scheme */
+        footer#footer, #footer, footer.footer, .footer, .footer-other, #footer .footer-bar, #footer .footer-wrap {
+          background: #f5f8ff !important;
+          color: #1f2740 !important;
+        }
+        #footer a, .footer a, .footer-other a { color: #1e4b8f !important; }
+        #footer a:hover, .footer a:hover, .footer-other a:hover { color: #11386b !important; }
+        .footer-other { padding: 6px 0 !important; min-height: 38px !important; }
+        #footer .footer-wrap { padding-top: 6px !important; padding-bottom: 6px !important; }
+        footer#footer, #footer, footer.footer, .footer, .footer-other { position: relative !important; overflow: visible !important; }
+
+        /* Right-side progress to light gray-white */
+        #rightside .progress, #rightside .progress span, #rightside .bar, .rightside .progress, .rightside .bar { background-color: #e9edf3 !important; }
+        #rightside svg circle { stroke: #e9edf3 !important; }
+        #rightside svg circle.progress, #rightside svg .progress { stroke: #cfd6df !important; }
+        #progress-bar, .progressbar { background-color: #e9edf3 !important; }
+        #progress-bar .bar, .progressbar .bar { background-color: #cfd6df !important; }
+
+        /* Walking duck */
+        .footer-duck { position: absolute; bottom: 8px; left: 0; width: 28px; height: auto; pointer-events: none; z-index: 3;
+          animation: footer-duck-walk var(--footer-duck-duration, 22s) linear 1 forwards; transform: translateX(-10vw); }
+        @keyframes footer-duck-walk { 0% { transform: translateX(-10vw); opacity: 0; } 5% { opacity: 1; } 95% { transform: translateX(110vw); opacity: 1; } 100% { transform: translateX(110vw); opacity: 0; } }
+      </style>
     - |
       <style>
         footer#footer, #footer, footer.footer, .footer, .footer-other, #footer .footer-bar, #footer .footer-wrap {
