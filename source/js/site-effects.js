@@ -18,17 +18,18 @@
   const CLOUD_PRIMARY = '/img/cloud.png'; // optional user-provided
   // Soft cloud SVG fallback (blurred multi-circle)
   const CLOUD_FALLBACK = 'data:image/svg+xml;utf8,' + encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" width="240" height="140" viewBox="0 0 240 140">\
+    '<svg xmlns="http://www.w3.org/2000/svg" width="260" height="150" viewBox="0 0 260 150">\
       <defs>\
         <filter id="b" x="-20%" y="-20%" width="140%" height="140%">\
-          <feGaussianBlur stdDeviation="3.5"/>\
+          <feGaussianBlur stdDeviation="6"/>\
         </filter>\
       </defs>\
-      <g filter="url(#b)" fill="#fff" fill-opacity="0.95">\
-        <circle cx="70" cy="75" r="38"/>\
-        <circle cx="100" cy="60" r="46"/>\
-        <circle cx="135" cy="78" r="40"/>\
-        <ellipse cx="110" cy="90" rx="78" ry="28"/>\
+      <g filter="url(#b)" fill="#fff" fill-opacity="0.98">\
+        <circle cx="70" cy="78" r="42"/>\
+        <circle cx="105" cy="60" r="52"/>\
+        <circle cx="145" cy="80" r="46"/>\
+        <circle cx="178" cy="72" r="36"/>\
+        <ellipse cx="120" cy="96" rx="90" ry="30"/>\
       </g>\
     </svg>'
   );
@@ -77,7 +78,7 @@
       const heightPx = widthPx * 0.55;                  // aspect
       const duration = 50 + Math.random() * 70;         // 50–120s
       const delay = -Math.random() * duration;          // negative to stagger
-      const opacity = 0.12 + Math.random() * 0.23;      // 0.12–0.35
+      const opacity = 0.25 + Math.random() * 0.20;      // 0.25–0.45 (less transparent)
 
       c.style.top = topVh + 'vh';
       c.style.width = widthPx + 'px';

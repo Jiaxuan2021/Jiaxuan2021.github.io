@@ -66,8 +66,8 @@ img[src*="/img/portrait.png"] {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  opacity: .28;            /* JS will randomize */
-  filter: drop-shadow(0 2px 2px rgba(0,0,0,.04));
+  opacity: .35;            /* JS will randomize per cloud to be less transparent */
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.06));
   animation-name: cloud-drift;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
@@ -87,7 +87,7 @@ img[src*="/img/portrait.png"] {
   z-index: 9999;
   pointer-events: none;
   will-change: transform, opacity;
-  animation: duck-fall 1.8s cubic-bezier(.22,.61,.36,1) forwards;
+  animation: duck-fall 2.8s cubic-bezier(.22,.61,.36,1) forwards; /* slower fall */
 }
 
 @keyframes duck-fall {
