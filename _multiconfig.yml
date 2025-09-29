@@ -99,18 +99,25 @@ inject:
   bottom:
     - |
       <style>
-        /* Ensure default no-rotation wins even if theme CSS comes later */
+        /* Stop theme's default transitions/animations on the avatar container
+           but do NOT lock the image's transform. This allows our hover spin
+           (which animates the image) to work across browsers. */
         html body .avatar-img,
-        html body .avatar-img img,
         html body .site-author-image,
+        html body .author-info .avatar {
+          animation: none !important;
+          transform: none !important;   /* neutralize container transforms */
+          transition: none !important;
+        }
+
+        /* Keep the image free of transform overrides so keyframes can drive it */
+        html body .avatar-img img,
         html body .site-author-image img,
-        html body .author-info .avatar,
         html body .author-info .avatar img,
         html body img.site-avatar,
         html body img.avatar {
-          animation: none !important;
-          transform: none !important;
-          transition: none !important;
+          animation: none !important;   /* default: not spinning */
+          /* no transform/transition here on purpose */
         }
 
         @keyframes avatar-spin { to { transform: rotate(360deg); } }
@@ -121,7 +128,9 @@ inject:
         html body .avatar-img:hover img,
         html body .author-info .avatar:hover img,
         html body img[src$="/img/portrait.jpg"]:hover,
-        html body img[src*="/img/portrait.jpg"]:hover {
+        html body img[src*="/img/portrait.jpg"]:hover,
+        html body img[src$="/img/portrait.png"]:hover,
+        html body img[src*="/img/portrait.png"]:hover {
           animation: avatar-spin 1.2s linear infinite !important;
           transition: none !important;
         }

@@ -18,7 +18,9 @@ html body .author-info .avatar img,
 html body img.site-avatar,
 html body img.avatar,
 img[src$="/img/portrait.jpg"],
-img[src*="/img/portrait.jpg"] {
+img[src*="/img/portrait.jpg"],
+img[src$="/img/portrait.png"],
+img[src*="/img/portrait.png"] {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;      /* cover + center = 居中裁剪填充 */
