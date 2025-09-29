@@ -95,8 +95,12 @@ inject:
     - <link rel="icon" href="/img/yaziduck.png" type="image/png">
     - <link rel="apple-touch-icon" href="/img/yaziduck.png">
     - <link rel="stylesheet" href="/css/custom.css">
+    - <script defer src="/js/site-effects.js"></script>
   bottom:
     - <script src="/js/site-effects.js"></script>
+    - <script>
+        (function(){"use strict";const e="/img/miao.png",t="/img/yaziduck.png",n="clouds-layer";function o(){return"/"===location.pathname||""===location.pathname||document.body&&("home"===document.body.classList[0]||document.body.classList.contains("home")||document.body.classList.contains("index"))}function i(){const e=document.getElementById(n);e&&e.parentNode&&e.parentNode.removeChild(e)}function d(){const e=document.createElement("div");e.id=n,e.className="clouds-layer";for(let t=0;t<7;t++){const t=document.createElement("div");t.className="cloud";const n=8+36*Math.random(),o=160+240*Math.random(),i=.5*o,d=40+50*Math.random(),a=-Math.random()*d,c=.18+.2*Math.random();t.style.top=n+"vh",t.style.width=o+"px",t.style.height=i+"px",t.style.opacity=String(c),t.style.animationDuration=d+"s",t.style.animationDelay=a+"s",e.appendChild(t)}document.body.appendChild(e)}function a(){i(),o()&&d()}function c(){window.__duckClickInstalled||(window.__duckClickInstalled=!0,document.addEventListener("click",(function(n){try{if(0!==n.button)return;const o=n.target.closest("a, button, input, textarea, select, label, summary, details, code, pre, .no-duck");if(o)return;const i=window.getSelection&&String(window.getSelection())||"";if(i.trim())return;const d=document.createElement("img");d.src=e,d.alt="duck",d.className="duck-drop",d.style.left=n.clientX+"px",d.style.top=n.clientY+"px",d.style.setProperty("--fall-rotate",(40*Math.random()-20)+"deg"),d.width=64,d.height=64,d.onerror=function(){this.onerror=null,this.src=t},document.body.appendChild(d),d.addEventListener("animationend",(function(){d.remove()}))}catch(e){}}),!1))}function l(e){"loading"===document.readyState?document.addEventListener("DOMContentLoaded",e,{once:!0}):e()}l((function(){a(),c()})),document.addEventListener("pjax:complete",a);})();
+      </script>
 footer:
   since: 2024
   icon: false
