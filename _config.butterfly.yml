@@ -47,7 +47,7 @@ inject:
         }
         #footer a, .footer a, .footer-other a { color: #1e4b8f !important; }
         #footer a:hover, .footer a:hover, .footer-other a:hover { color: #11386b !important; }
-        .footer-other { padding: 6px 0 !important; min-height: 38px !important; }
+        .footer-other { padding: 20px 0 !important; min-height: 38px !important; }
         #footer .footer-wrap { padding-top: 6px !important; padding-bottom: 6px !important; }
         footer#footer, #footer, footer.footer, .footer, .footer-other { position: relative !important; overflow: visible !important; }
 
