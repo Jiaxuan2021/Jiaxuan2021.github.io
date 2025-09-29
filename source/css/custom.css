@@ -5,7 +5,7 @@ img.site-avatar, img.avatar, .site-author-image img, .author-info .avatar img {
   height: 100% !important;
   border-radius: 50%;
   object-fit: cover;            /* 填充圆形窗口 */
-  object-position: 50% 30%;     /* 再向上偏移 */
+  object-position: 50% 45%;      /* 向下偏移，展示头像顶部 */
   animation: none !important;   /* 默认不旋转，覆盖主题样式 */
   transform: none !important;
   will-change: transform;
@@ -18,7 +18,7 @@ img[src$="/img/portrait.jpg"], img[src*="/img/portrait.jpg"] {
   height: 100% !important;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 50% 30%;
+  object-position: 50% 45%;
   animation: none !important;
   transform: none !important;
   will-change: transform;
@@ -50,8 +50,8 @@ html body img.avatar {
 html body .avatar-img,
 html body .site-author-image,
 html body .author-info .avatar {
-  width: 160px !important;   /* enlarged avatar window */
-  height: 160px !important;
+  width: 200px !important;   /* enlarged avatar window */
+  height: 200px !important;
   margin: 0 auto;
 }
 
@@ -92,5 +92,5 @@ html body img.avatar,
 html body .site-author-image img,
 html body .avatar-img img,
 html body .author-info .avatar img {
-  transform: translateY(-12%) scale(0.8) !important;
+  transform: translateY(5%) scale(0.8) !important;
 }
