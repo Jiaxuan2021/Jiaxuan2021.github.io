@@ -160,3 +160,12 @@ aside:
       - 框架 Hexo 8.0.0，主题 Butterfly 5.5.0
     # 可选：是否默认折叠
     hide: false
+
+  card_author:
+    enable: true
+    description:
+    button:
+      enable: true
+      icon: fab fa-github
+      text: Follow Me
+      link: https://github.com/Jiaxuan2021
