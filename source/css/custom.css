@@ -50,8 +50,8 @@ html body img.avatar {
 html body .avatar-img,
 html body .site-author-image,
 html body .author-info .avatar {
-  width: 220px !important;   /* enlarged avatar window */
-  height: 220px !important;
+  width: 160px !important;   /* enlarged avatar window */
+  height: 160px !important;
   margin: 0 auto;
 }
 
@@ -92,5 +92,5 @@ html body img.avatar,
 html body .site-author-image img,
 html body .avatar-img img,
 html body .author-info .avatar img {
-  transform: translateY(-10%) scale(0.85) !important;
+  transform: translateY(-7%) scale(0.85) !important;
 }
