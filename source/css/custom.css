@@ -14,8 +14,8 @@ img.site-avatar, img.avatar, .site-author-image img, .author-info .avatar img {
 
 /* Fallback: target the specific file path */
 img[src$="/img/portrait.jpg"], img[src*="/img/portrait.jpg"] {
-  width: 100% !important;
-  height: 100% !important;
+  width: 90% !important;
+  /* height: 100% !important; */
   border-radius: 50%;
   object-fit: cover;
   object-position: 50% 45%;
@@ -86,13 +86,4 @@ html body .avatar-img:hover img,
 html body .author-info .avatar:hover img {
   animation: avatar-spin 1.2s linear infinite !important;
   transition: none !important;
-}
-
-/* ----- 新增：微缩并上移图像以展示更多内容 ----- */
-html body img.site-avatar,
-html body img.avatar,
-html body .site-author-image img,
-html body .avatar-img img,
-html body .author-info .avatar img {
-  transform: translateY(10%) scale(0.8) !important;
 }
