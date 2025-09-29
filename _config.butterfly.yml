@@ -9,11 +9,10 @@ index_img: /img/banner.jpg   # 可稍后放一张图到 source/img/banner.jpg
 # 头像配置（Butterfly 推荐写法）
 avatar:
   img: /img/portrait.jpg?v=3  # 使用 jpg 并更新版本参数防缓存
-  # effect: false               # 默认不旋转（仅 hover 时旋转）
+  effect: false  # 关闭默认旋转，仅在悬停时旋转
 subtitle:
   enable: true
   text: "博士通关中"
-  effect: true
 
 # 动效/体验
 pjax: true
@@ -32,34 +31,7 @@ inject:
     - <link rel="apple-touch-icon" href="/img/yaziduck.png">
     - <link rel="stylesheet" href="/css/custom.css">
   bottom:
-    - |
-      <style>
-        /* Ensure default no-rotation wins even if theme CSS comes later */
-        html body .avatar-img,
-        html body .avatar-img img,
-        html body .site-author-image,
-        html body .site-author-image img,
-        html body .author-info .avatar,
-        html body .author-info .avatar img,
-        html body img.site-avatar,
-        html body img.avatar {
-          animation: none !important;  /* 保持不自动旋转 */
-          /* 不重置 transform，让 custom.css 的缩放位移生效 */
-        }
-
-        @keyframes avatar-spin { to { transform: rotate(360deg); } }
-        /* On hover, force rotation even with strong default disables */
-        html body img.site-avatar:hover,
-        html body img.avatar:hover,
-        html body .site-author-image:hover img,
-        html body .avatar-img:hover img,
-        html body .author-info .avatar:hover img,
-        html body img[src$="/img/portrait.jpg"]:hover,
-        html body img[src*="/img/portrait.jpg"]:hover {
-          animation: avatar-spin 1.2s linear infinite !important;
-          transition: none !important;
-        }
-      </style>
+    # 移除会覆盖主题动画的内联样式，交由主题控制 effect
 
 # 页脚
 footer:
