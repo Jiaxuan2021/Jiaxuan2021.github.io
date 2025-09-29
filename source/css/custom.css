@@ -4,8 +4,8 @@ img.site-avatar, img.avatar, .site-author-image img, .author-info .avatar img {
   width: 100% !important;      /* fill container */
   height: 100% !important;
   border-radius: 50%;
-  object-fit: contain;          /* 保证完整显示 */
-  object-position: center;      /* 居中显示 */
+  object-fit: cover;            /* 填充圆形窗口 */
+  object-position: 50% 35%;     /* 向上偏移以露出更多下半部分 */
   animation: none !important;   /* 默认不旋转，覆盖主题样式 */
   transform: none !important;
   will-change: transform;
@@ -17,8 +17,8 @@ img[src$="/img/portrait.jpg"], img[src*="/img/portrait.jpg"] {
   width: 100% !important;
   height: 100% !important;
   border-radius: 50%;
-  object-fit: contain;
-  object-position: center;
+  object-fit: cover;
+  object-position: 50% 35%;
   animation: none !important;
   transform: none !important;
   will-change: transform;
@@ -84,4 +84,13 @@ html body .avatar-img:hover img,
 html body .author-info .avatar:hover img {
   animation: avatar-spin 1.2s linear infinite !important;
   transition: none !important;
+}
+
+/* ----- 新增：微缩并上移图像以展示更多内容 ----- */
+html body img.site-avatar,
+html body img.avatar,
+html body .site-author-image img,
+html body .avatar-img img,
+html body .author-info .avatar img {
+  transform: translateY(-6%) scale(0.88) !important;
 }
