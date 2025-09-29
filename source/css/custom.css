@@ -50,9 +50,11 @@ html body img.avatar {
 html body .avatar-img,
 html body .site-author-image,
 html body .author-info .avatar {
-  width: 200px !important;   /* enlarged avatar window */
-  height: 200px !important;
+  width: 160px !important;   /* enlarged avatar window */
+  height: 160px !important;
   margin: 0 auto;
+  border-radius: 50% !important; /* 恢复圆形 */
+  overflow: hidden !important;   /* 裁剪超出部分 */
 }
 
 /* 容器悬停也触发旋转（兼容不同 DOM 结构） */
@@ -92,5 +94,5 @@ html body img.avatar,
 html body .site-author-image img,
 html body .avatar-img img,
 html body .author-info .avatar img {
-  transform: translateY(5%) scale(0.8) !important;
+  transform: translateY(10%) scale(0.8) !important;
 }
