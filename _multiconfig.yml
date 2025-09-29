@@ -1,0 +1,140 @@
+title: Jiaxuan's Homepage
+subtitle:
+  enable: true
+  text: 博士通关中
+  effect: true
+description: 博士通关中
+keywords: null
+author: jiaxuan
+language: zh-CN
+timezone: ''
+url: https://bio.harriet23.top
+permalink: ':year/:month/:day/:title/'
+permalink_defaults: null
+pretty_urls:
+  trailing_index: true
+  trailing_html: true
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: ':lang'
+skip_render: null
+new_post_name: ':title.md'
+default_layout: post
+titlecase: false
+external_link:
+  enable: true
+  field: site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+syntax_highlighter: highlight.js
+highlight:
+  line_number: true
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
+prismjs:
+  preprocess: true
+  line_number: true
+  tab_replace: ''
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: '-date'
+default_category: uncategorized
+category_map: null
+tag_map: null
+meta_generator: true
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+updated_option: mtime
+per_page: 10
+pagination_dir: page
+include:
+  - .nojekyll
+  - CNAME
+exclude: null
+ignore: null
+theme: butterfly
+deploy:
+  type: ''
+search:
+  path: search.xml
+  field: post
+  content: true
+sitemap:
+  path: sitemap.xml
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+menu:
+  Home: /
+  Archives: /archives/
+  About: /about/
+index_img: /img/banner.jpg
+avatar:
+  img: /img/portrait.png?v=2
+  effect: false
+pjax: true
+lazyload:
+  enable: true
+  only: img
+copy_btn: true
+code_copy:
+  enable: true
+inject:
+  head:
+    - <link rel="icon" href="/img/yaziduck.png" type="image/png">
+    - <link rel="apple-touch-icon" href="/img/yaziduck.png">
+    - <link rel="stylesheet" href="/css/custom.css">
+  bottom:
+    - |
+      <style>
+        /* Ensure default no-rotation wins even if theme CSS comes later */
+        html body .avatar-img,
+        html body .avatar-img img,
+        html body .site-author-image,
+        html body .site-author-image img,
+        html body .author-info .avatar,
+        html body .author-info .avatar img,
+        html body img.site-avatar,
+        html body img.avatar {
+          animation: none !important;
+          transform: none !important;
+          transition: none !important;
+        }
+
+        @keyframes avatar-spin { to { transform: rotate(360deg); } }
+        /* On hover, force rotation even with strong default disables */
+        html body img.site-avatar:hover,
+        html body img.avatar:hover,
+        html body .site-author-image:hover img,
+        html body .avatar-img:hover img,
+        html body .author-info .avatar:hover img,
+        html body img[src$="/img/portrait.jpg"]:hover,
+        html body img[src*="/img/portrait.jpg"]:hover {
+          animation: avatar-spin 1.2s linear infinite !important;
+          transition: none !important;
+        }
+      </style>
+footer:
+  since: 2024
+  icon: false
+local_search:
+  enable: true
+  trigger: auto
+  top_n_per_article: 1
+  unescape: true
+animation:
+  enable: true
+  post_list: true
+  mask: true

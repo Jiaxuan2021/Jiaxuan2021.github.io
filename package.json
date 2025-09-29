@@ -7,7 +7,8 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server",
-    "serve": "hexo server"
+    "serve": "hexo server",
+    "dev": "hexo clean && hexo s -o --config _config.yml,_config.butterfly.yml"
   },
   "hexo": {
     "version": "8.0.0"
