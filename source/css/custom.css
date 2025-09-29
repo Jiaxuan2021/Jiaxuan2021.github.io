@@ -50,8 +50,8 @@ html body img.avatar {
 html body .avatar-img,
 html body .site-author-image,
 html body .author-info .avatar {
-  width: 140px !important;   /* adjust avatar size here */
-  height: 140px !important;
+  width: 150px !important;   /* adjust avatar size here */
+  height: 150px !important;
   margin: 0 auto;
 }
 
