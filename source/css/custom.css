@@ -66,7 +66,7 @@ img[src*="/img/portrait.png"] {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  opacity: .35;            /* JS will randomize per cloud to be less transparent */
+  opacity: .45;            /* JS will randomize per cloud to be less transparent */
   filter: drop-shadow(0 2px 2px rgba(0,0,0,.06));
   animation-name: cloud-drift;
   animation-timing-function: linear;
@@ -107,4 +107,37 @@ img[src*="/img/portrait.png"] {
   html body img[src*="/img/portrait.jpg"]:hover {
     animation: avatar-spin 1.2s linear infinite !important;
   }
+}
+
+/* --- Footer Styling & Walking Duck --- */
+/* Make footer visually distinct from rightside settings (blue-on-blue issue) */
+#footer, .footer, .footer-other {
+  background: #0f2e5e !important; /* deep navy blue */
+  color: #ffffff;
+}
+#footer a, .footer a, .footer-other a {
+  color: #e6efff;
+}
+#footer a:hover, .footer a:hover, .footer-other a:hover {
+  color: #ffffff;
+}
+
+/* Ensure positioning context for walking duck */
+#footer, .footer, .footer-other { position: relative; }
+
+.footer-duck {
+  position: absolute;
+  bottom: 8px; left: 0;
+  width: 28px; height: auto;
+  pointer-events: none;
+  z-index: 3;
+  animation: footer-duck-walk var(--footer-duck-duration, 22s) linear 1 forwards;
+  transform: translateX(-10vw);
+}
+
+@keyframes footer-duck-walk {
+  0%   { transform: translateX(-10vw); opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { transform: translateX(110vw); opacity: 1; }
+  100% { transform: translateX(110vw); opacity: 0; }
 }

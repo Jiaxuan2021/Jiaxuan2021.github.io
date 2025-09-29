@@ -78,7 +78,7 @@
       const heightPx = widthPx * 0.55;                  // aspect
       const duration = 50 + Math.random() * 70;         // 50–120s
       const delay = -Math.random() * duration;          // negative to stagger
-      const opacity = 0.25 + Math.random() * 0.20;      // 0.25–0.45 (less transparent)
+      const opacity = 0.4 + Math.random() * 0.3;        // 0.4–0.7 (less transparent overall)
 
       c.style.top = topVh + 'vh';
       c.style.width = widthPx + 'px';
@@ -96,6 +96,41 @@
   function setupCloudsForHome() {
     removeClouds();
     if (isHome()) spawnClouds();
+  }
+
+  // Footer walking duck loop
+  function spawnFooterDuckOnce(container) {
+    const img = document.createElement('img');
+    img.className = 'footer-duck';
+    img.src = DUCK_SRC_PRIMARY;
+    img.alt = 'duck';
+    img.onerror = function () { this.onerror = null; this.src = DUCK_SRC_FALLBACK; };
+    // Randomize a slight duration variance per loop to feel organic
+    const base = 22; // seconds
+    const jitter = Math.random() * 4 - 2; // -2..+2s
+    img.style.setProperty('--footer-duck-duration', (base + jitter).toFixed(1) + 's');
+    container.appendChild(img);
+    img.addEventListener('animationend', function () {
+      img.remove();
+      setTimeout(() => spawnFooterDuckOnce(container), 1000); // wait 1s then restart
+    });
+  }
+
+  function setupFooterDuck() {
+    const footer = document.getElementById('footer') || document.querySelector('.footer-other') || document.querySelector('.footer');
+    if (!footer) return;
+    let layer = footer.querySelector('.footer-duck-layer');
+    if (!layer) {
+      layer = document.createElement('div');
+      layer.className = 'footer-duck-layer';
+      layer.style.position = 'absolute';
+      layer.style.inset = '0';
+      layer.style.pointerEvents = 'none';
+      footer.appendChild(layer);
+    } else {
+      layer.innerHTML = '';
+    }
+    spawnFooterDuckOnce(layer);
   }
 
   function installDuckDropOnce() {
@@ -135,6 +170,10 @@
   onReady(function () {
     setupCloudsForHome();
     installDuckDropOnce();
+    setupFooterDuck();
   });
-  document.addEventListener('pjax:complete', setupCloudsForHome);
+  document.addEventListener('pjax:complete', function(){
+    setupCloudsForHome();
+    setupFooterDuck();
+  });
 })();
