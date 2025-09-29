@@ -26,3 +26,15 @@ img[src*="/img/portrait.jpg"] {
   display: block;
   border-radius: 50% !important;     /* 双重保障为圆形 */
 }
+
+/* Hover-only rotation */
+@keyframes avatar-spin { to { transform: rotate(360deg); } }
+html body img.site-avatar:hover,
+html body img.avatar:hover,
+html body .site-author-image:hover img,
+html body .avatar-img:hover img,
+html body .author-info .avatar:hover img,
+html body img[src$="/img/portrait.jpg"]:hover,
+html body img[src*="/img/portrait.jpg"]:hover {
+  animation: avatar-spin 1.2s linear infinite !important;
+}
