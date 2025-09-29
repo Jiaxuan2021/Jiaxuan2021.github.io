@@ -83,6 +83,32 @@ footer:
   copyright:
     enable: false
 
+# 访问统计
+# 关闭不蒜子（如果你在其它地方开启过，这里再次明确为 false）
+busuanzi:
+  enable: false
+
+# 使用 LeanCloud 统计 PV/UV（Butterfly 的常见配置写法，若你的主题版本采用不同字段名，也能忽略不影响）
+# 写法一：部分版本使用 pageview + leancloud 段落
+pageview:
+  enable: true
+  source: leancloud
+
+leancloud:
+  app_id: WgmQRFC1HEneq1k1Ptv6YRa7-MdYXbMMI
+  app_key: 23rJvxEYMEPpBst23zagP4sO
+  server_url: https://wgmqrfc1.api.lncldglobal.com
+
+# 写法二（备用）：一些版本使用 leancloud_visitors 段落
+leancloud_visitors:
+  enable: true
+  app_id: WgmQRFC1HEneq1k1Ptv6YRa7-MdYXbMMI
+  app_key: 23rJvxEYMEPpBst23zagP4sO
+  server_url: https://wgmqrfc1.api.lncldglobal.com
+  site_pv: true
+  site_uv: true
+  page_pv: true
+
 # 搜索
 local_search:
   enable: true
@@ -105,6 +131,10 @@ aside:
     content: |
       欢迎来到本站！🎉<br>
       - 近期更新：新增两篇博文；<br>
-      - 联系方式：xxx@xxx.com
+      - 联系方式：liu_jiaxuan2021@163.com
+      - 框架 Hexo 8.0.0，主题 Butterfly 5.5.0
     # 可选：是否默认折叠
     hide: false
+
+busuanzi:
+    enable: false

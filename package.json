@@ -29,6 +29,7 @@
     "hexo-renderer-stylus": "*",
     "hexo-server": "^3.0.0",
     "hexo-theme-butterfly": "*",
+    "hexo-leancloud-counter-security": "*",
     "hexo-theme-landscape": "^1.0.0",
     "hexo-wordcount": "*"
   }

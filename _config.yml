@@ -119,3 +119,12 @@ feed:
   type: atom
   path: atom.xml
   limit: 20
+
+# LeanCloud Counter (via hexo-leancloud-counter-security)
+leancloud_counter_security:
+  enable_sync: true
+  app_id: WgmQRFC1HEneq1k1Ptv6YRa7-MdYXbMMI
+  app_key: 23rJvxEYMEPpBst23zagP4sO
+  server_url: https://wgmqrfc1.api.lncldglobal.com
+  # 可选：当主题未自动注入 SDK 时，可由插件注入；保持默认即可
+  # path: api/counter

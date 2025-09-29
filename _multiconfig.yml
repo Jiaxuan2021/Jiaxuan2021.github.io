@@ -184,3 +184,12 @@ animation:
   enable: true
   post_list: true
   mask: true
+aside:
+  enable: true
+  card_announcement:
+    enable: true
+    content: |
+      欢迎来到本站！🎉<br>
+      - 近期更新：新增两篇博文；<br>
+      - 联系方式：xxx@xxx.com
+    hide: false
