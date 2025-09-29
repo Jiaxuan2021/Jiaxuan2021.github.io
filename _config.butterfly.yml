@@ -43,9 +43,8 @@ inject:
         html body .author-info .avatar img,
         html body img.site-avatar,
         html body img.avatar {
-          animation: none !important;
-          transform: none !important;
-          transition: none !important;
+          animation: none !important;  /* 保持不自动旋转 */
+          /* 不重置 transform，让 custom.css 的缩放位移生效 */
         }
 
         @keyframes avatar-spin { to { transform: rotate(360deg); } }
