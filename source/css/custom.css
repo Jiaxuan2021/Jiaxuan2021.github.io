@@ -25,16 +25,35 @@ img[src*="/img/portrait.jpg"] {
   object-position: 50% 50% !important; /* 水平/垂直居中 */
   display: block;
   border-radius: 50% !important;     /* 双重保障为圆形 */
+  transform-origin: 50% 50% !important; /* 旋转基点居中，防抖动 */
 }
 
-/* Hover-only rotation */
+/* Hover-only rotation (robust) */
+@keyframes avatar-rot { to { rotate: 1turn; } }
 @keyframes avatar-spin { to { transform: rotate(360deg); } }
-html body img.site-avatar:hover,
-html body img.avatar:hover,
-html body .site-author-image:hover img,
-html body .avatar-img:hover img,
-html body .author-info .avatar:hover img,
-html body img[src$="/img/portrait.jpg"]:hover,
-html body img[src*="/img/portrait.jpg"]:hover {
-  animation: avatar-spin 1.2s linear infinite !important;
+
+/* 使用独立 rotate 属性，避免与主题 transform 冲突 */
+@supports (rotate: 1turn) {
+  html body img.site-avatar:hover,
+  html body img.avatar:hover,
+  html body .site-author-image:hover img,
+  html body .avatar-img:hover img,
+  html body .author-info .avatar:hover img,
+  html body img[src$="/img/portrait.jpg"]:hover,
+  html body img[src*="/img/portrait.jpg"]:hover {
+    animation: avatar-rot 1.2s linear infinite !important;
+  }
+}
+
+/* 回退方案：不支持 rotate 时使用 transform 旋转 */
+@supports not (rotate: 1turn) {
+  html body img.site-avatar:hover,
+  html body img.avatar:hover,
+  html body .site-author-image:hover img,
+  html body .avatar-img:hover img,
+  html body .author-info .avatar:hover img,
+  html body img[src$="/img/portrait.jpg"]:hover,
+  html body img[src*="/img/portrait.jpg"]:hover {
+    animation: avatar-spin 1.2s linear infinite !important;
+  }
 }
