@@ -92,5 +92,5 @@ html body img.avatar,
 html body .site-author-image img,
 html body .avatar-img img,
 html body .author-info .avatar img {
-  transform: translateY(-10%) scale(0.80) !important;
+  transform: translateY(-10%) scale(0.60) !important;
 }
