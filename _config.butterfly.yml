@@ -80,6 +80,8 @@ inject:
 footer:
   since: 2024
   icon: false
+  copyright:
+    enable: false
 
 # 搜索
 local_search:
