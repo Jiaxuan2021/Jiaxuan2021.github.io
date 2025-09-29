@@ -73,15 +73,46 @@ inject:
           var SERVER_URL = 'https://wgmqrfc1.api.lncldglobal.com';
           function todayKey(){ var d=new Date(),m=d.getMonth()+1,dd=d.getDate(); return d.getFullYear()+'-'+(m<10?'0'+m:m)+'-'+(dd<10?'0'+dd:dd); }
           function fmt(n){ try{ n=Number(n)||0; return n.toLocaleString(); }catch(e){ return String(n); } }
-          function onReady(fn){ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', fn, {once:true}); } else { fn(); } }
+      function onReady(fn){ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', fn, {once:true}); } else { fn(); } }
+      function ensureSitePlaceholders(){
+        var uv = document.getElementById('busuanzi_value_site_uv');
+        var pv = document.getElementById('busuanzi_value_site_pv');
+        var box = document.querySelector('.card-webinfo .webinfo');
+        if(box){
+          if(!uv){
+            var item1 = document.createElement('div'); item1.className='webinfo-item';
+            var name1 = document.createElement('div'); name1.className='item-name'; name1.textContent='本站访客数 :';
+            var val1 = document.createElement('div'); val1.className='item-count'; val1.id='busuanzi_value_site_uv'; val1.textContent='0';
+            item1.appendChild(name1); item1.appendChild(val1); box.appendChild(item1);
+          }
+          if(!pv){
+            var item2 = document.createElement('div'); item2.className='webinfo-item';
+            var name2 = document.createElement('div'); name2.className='item-name'; name2.textContent='本站总浏览量 :';
+            var val2 = document.createElement('div'); val2.className='item-count'; val2.id='busuanzi_value_site_pv'; val2.textContent='0';
+            item2.appendChild(name2); item2.appendChild(val2); box.appendChild(item2);
+          }
+        }
+      }
+      function ensurePagePlaceholder(){
+        var ppv = document.getElementById('busuanzi_value_page_pv');
+        if(ppv) return;
+        var meta = document.querySelector('#post-meta .meta-secondline') || document.querySelector('#post-info .meta-secondline');
+        if(!meta) return;
+        var wrap = document.createElement('span'); wrap.className='post-meta-pv-cv';
+        var icon = document.createElement('i'); icon.className='far fa-eye fa-fw post-meta-icon';
+        var label = document.createElement('span'); label.className='post-meta-label'; label.textContent='浏览量:';
+        var val = document.createElement('span'); val.id='busuanzi_value_page_pv'; val.textContent='0';
+        wrap.appendChild(icon); wrap.appendChild(label); wrap.appendChild(val);
+        meta.appendChild(wrap);
+      }
           function ensureAv(cb){ if(window.AV && AV.init){ cb(); return; } console.error('LeanCloud SDK not loaded'); }
           function normPath(){ var p = location.pathname; if (p.endsWith('index.html')) p = p.replace(/index\.html$/, '/'); if (!p.endsWith('/')) p += '/'; return p; }
           function updateEl(id, val){ var el=document.getElementById(id); if(el){ el.textContent = fmt(val); } }
           function incSitePV(AV){ var Q = new AV.Query('Site'); Q.equalTo('name','global'); return Q.first().catch(function(){return null;}).then(function(obj){ if(!obj){ obj = new AV.Object('Site'); obj.set('name','global'); obj.set('pv',0); obj.set('uv',0); } obj.increment('pv',1); return obj.save().then(function(saved){ return saved.get('pv'); }); }); }
           function incSiteUV(AV){ var key='LC_UV_'+todayKey(); if(sessionStorage.getItem(key)){ return Promise.resolve(null); } sessionStorage.setItem(key,'1'); var Q = new AV.Query('Site'); Q.equalTo('name','global'); return Q.first().catch(function(){return null;}).then(function(obj){ if(!obj){ obj = new AV.Object('Site'); obj.set('name','global'); obj.set('pv',0); obj.set('uv',0); } obj.increment('uv',1); return obj.save().then(function(saved){ return saved.get('uv'); }); }); }
           function incPagePV(AV){ var url = normPath(); var Q = new AV.Query('Counter'); Q.equalTo('url', url); return Q.first().catch(function(){return null;}).then(function(obj){ if(!obj){ obj = new AV.Object('Counter'); obj.set('url', url); obj.set('title', document.title || url); obj.set('time',0); } obj.increment('time',1); return obj.save().then(function(saved){ return saved.get('time'); }); }); }
-          onReady(function(){ ensureAv(function(){ try{ AV.init({ appId: APP_ID, appKey: APP_KEY, serverURL: SERVER_URL }); }catch(e){ console.error(e); return; } incSitePV(AV).then(function(pv){ if(pv!=null) updateEl('busuanzi_value_site_pv', pv); }).catch(console.error); incSiteUV(AV).then(function(uv){ if(uv!=null) updateEl('busuanzi_value_site_uv', uv); }).catch(console.error); incPagePV(AV).then(function(ppv){ if(ppv!=null) updateEl('busuanzi_value_page_pv', ppv); }).catch(console.error); }); });
-          document.addEventListener('pjax:complete', function(){ onReady(function(){ ensureAv(function(){ incSitePV(AV).then(function(pv){ if(pv!=null) updateEl('busuanzi_value_site_pv', pv); }).catch(console.error); incPagePV(AV).then(function(ppv){ if(ppv!=null) updateEl('busuanzi_value_page_pv', ppv); }).catch(console.error); }); }); });
+          onReady(function(){ ensureSitePlaceholders(); ensurePagePlaceholder(); ensureAv(function(){ try{ AV.init({ appId: APP_ID, appKey: APP_KEY, serverURL: SERVER_URL }); }catch(e){ console.error(e); return; } incSitePV(AV).then(function(pv){ if(pv!=null) updateEl('busuanzi_value_site_pv', pv); }).catch(console.error); incSiteUV(AV).then(function(uv){ if(uv!=null) updateEl('busuanzi_value_site_uv', uv); }).catch(console.error); incPagePV(AV).then(function(ppv){ if(ppv!=null) updateEl('busuanzi_value_page_pv', ppv); }).catch(console.error); }); });
+          document.addEventListener('pjax:complete', function(){ onReady(function(){ ensureSitePlaceholders(); ensurePagePlaceholder(); ensureAv(function(){ incSitePV(AV).then(function(pv){ if(pv!=null) updateEl('busuanzi_value_site_pv', pv); }).catch(console.error); incPagePV(AV).then(function(ppv){ if(ppv!=null) updateEl('busuanzi_value_page_pv', ppv); }).catch(console.error); }); }); });
         })();
       </script>
     - |
@@ -107,9 +138,9 @@ footer:
 # 访问统计
 # 关闭不蒜子（Butterfly 5.5.0 用三个开关控制）
 busuanzi:
-  site_uv: true
-  site_pv: true
-  page_pv: true
+  site_uv: false
+  site_pv: false
+  page_pv: false
 
 # 使用 LeanCloud 统计 PV/UV（Butterfly 的常见配置写法，若你的主题版本采用不同字段名，也能忽略不影响）
 # 写法一：部分版本使用 pageview + leancloud 段落

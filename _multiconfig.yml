@@ -241,3 +241,11 @@ aside:
       - 联系方式：liu_jiaxuan2021@163.com<br>
       - 框架 Hexo 8.0.0，主题 Butterfly 5.5.0
     hide: false
+  card_author:
+    enable: true
+    description: null
+    button:
+      enable: true
+      icon: fab fa-github
+      text: Follow Me
+      link: https://github.com/Jiaxuan2021
