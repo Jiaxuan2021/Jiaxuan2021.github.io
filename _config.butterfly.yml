@@ -31,6 +31,7 @@ inject:
     - <link rel="apple-touch-icon" href="/img/yaziduck.png?v=2">
     - <link rel="stylesheet" href="/css/custom.css?v=4">
     - <script defer src="/js/site-effects.js?v=5"></script>
+    - <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4/dist/av-min.js"></script>
   bottom:
     - <script>
         (function(){"use strict";const e="/img/miao.png",t="/img/yaziduck.png",n="clouds-layer",o="/img/cloud.png",i="data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="260" height="150" viewBox="0 0 260 150"><defs><filter id="b" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter></defs><g filter="url(#b)" fill="#fff" fill-opacity="0.98"><circle cx="70" cy="78" r="42"/><circle cx="105" cy="60" r="52"/><circle cx="145" cy="80" r="46"/><circle cx="178" cy="72" r="36"/><ellipse cx="120" cy="96" rx="90" ry="30"/></g></svg>');let a=i;!function(){const e=new Image;e.onload=function(){e.naturalWidth>0&&(a=o,document.getElementById(n)&&d())},e.onerror=function(){},e.src=o}();function c(){return"/"===location.pathname||""===location.pathname||document.body&&(document.body.classList.contains("home")||document.body.classList.contains("index"))}function l(){const e=document.getElementById(n);e&&e.parentNode&&e.parentNode.removeChild(e)}function s(){const e=document.createElement("div");e.id=n,e.className="clouds-layer";for(let t=0;t<7;t++){const t=document.createElement("div");t.className="cloud";const n=2+14*Math.random(),o=120+200*Math.random(),i=.55*o,c=50+70*Math.random(),s=-Math.random()*c,r=.25+.2*Math.random();t.style.top=n+"vh",t.style.width=o+"px",t.style.height=i+"px",t.style.opacity=String(r),t.style.animationDuration=c+"s",t.style.animationDelay=s+"s",t.style.backgroundImage='url("'+a+'")',e.appendChild(t)}document.body.appendChild(e)}function d(){l(),c()&&s()}function r(){window.__duckClickInstalled||(window.__duckClickInstalled=!0,document.addEventListener("click",(function(n){try{if(0!==n.button)return;const o=n.target.closest("a, button, input, textarea, select, label, summary, details, code, pre, .no-duck");if(o)return;const i=window.getSelection&&String(window.getSelection())||"";if(i.trim())return;const d=document.createElement("img");d.src=e,d.alt="duck",d.className="duck-drop",d.style.left=n.clientX+"px",d.style.top=n.clientY+"px",d.style.setProperty("--fall-rotate",(40*Math.random()-20)+"deg"),d.width=32,d.height=32,d.onerror=function(){this.onerror=null,this.src=t},document.body.appendChild(d),d.addEventListener("animationend",(function(){d.remove()}))}catch(e){}},!1))}function u(e){"loading"===document.readyState?document.addEventListener("DOMContentLoaded",e,{once:!0}):e()}u((function(){d(),r()})),document.addEventListener("pjax:complete",d);})();
@@ -64,6 +65,26 @@ inject:
         @keyframes footer-duck-walk { 0% { transform: translateX(-10vw); opacity: 0; } 5% { opacity: 1; } 95% { transform: translateX(110vw); opacity: 1; } 100% { transform: translateX(110vw); opacity: 0; } }
       </style>
     - |
+      <script>
+        (function(){
+          'use strict';
+          var APP_ID = 'WgmQRFC1HEneq1k1Ptv6YRa7-MdYXbMMI';
+          var APP_KEY = '23rJvxEYMEPpBst23zagP4sO';
+          var SERVER_URL = 'https://wgmqrfc1.api.lncldglobal.com';
+          function todayKey(){ var d=new Date(),m=d.getMonth()+1,dd=d.getDate(); return d.getFullYear()+'-'+(m<10?'0'+m:m)+'-'+(dd<10?'0'+dd:dd); }
+          function fmt(n){ try{ n=Number(n)||0; return n.toLocaleString(); }catch(e){ return String(n); } }
+          function onReady(fn){ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', fn, {once:true}); } else { fn(); } }
+          function ensureAv(cb){ if(window.AV && AV.init){ cb(); return; } console.error('LeanCloud SDK not loaded'); }
+          function normPath(){ var p = location.pathname; if (p.endsWith('index.html')) p = p.replace(/index\.html$/, '/'); if (!p.endsWith('/')) p += '/'; return p; }
+          function updateEl(id, val){ var el=document.getElementById(id); if(el){ el.textContent = fmt(val); } }
+          function incSitePV(AV){ var Q = new AV.Query('Site'); Q.equalTo('name','global'); return Q.first().then(function(obj){ if(!obj){ obj = new AV.Object('Site'); obj.set('name','global'); obj.set('pv',0); obj.set('uv',0); } obj.increment('pv',1); return obj.save().then(function(saved){ return saved.get('pv'); }); }); }
+          function incSiteUV(AV){ var key='LC_UV_'+todayKey(); if(sessionStorage.getItem(key)){ return Promise.resolve(null); } sessionStorage.setItem(key,'1'); var Q = new AV.Query('Site'); Q.equalTo('name','global'); return Q.first().then(function(obj){ if(!obj){ obj = new AV.Object('Site'); obj.set('name','global'); obj.set('pv',0); obj.set('uv',0); } obj.increment('uv',1); return obj.save().then(function(saved){ return saved.get('uv'); }); }); }
+          function incPagePV(AV){ var url = normPath(); var Q = new AV.Query('Counter'); Q.equalTo('url', url); return Q.first().then(function(obj){ if(!obj){ obj = new AV.Object('Counter'); obj.set('url', url); obj.set('title', document.title || url); obj.set('time',0); } obj.increment('time',1); return obj.save().then(function(saved){ return saved.get('time'); }); }); }
+          onReady(function(){ ensureAv(function(){ try{ AV.init({ appId: APP_ID, appKey: APP_KEY, serverURL: SERVER_URL }); }catch(e){ console.error(e); return; } incSitePV(AV).then(function(pv){ if(pv!=null) updateEl('busuanzi_value_site_pv', pv); }).catch(console.error); incSiteUV(AV).then(function(uv){ if(uv!=null) updateEl('busuanzi_value_site_uv', uv); }).catch(console.error); incPagePV(AV).then(function(ppv){ if(ppv!=null) updateEl('busuanzi_value_page_pv', ppv); }).catch(console.error); }); });
+          document.addEventListener('pjax:complete', function(){ onReady(function(){ ensureAv(function(){ incSitePV(AV).then(function(pv){ if(pv!=null) updateEl('busuanzi_value_site_pv', pv); }).catch(console.error); incPagePV(AV).then(function(ppv){ if(ppv!=null) updateEl('busuanzi_value_page_pv', ppv); }).catch(console.error); }); }); });
+        })();
+      </script>
+    - |
       <style>
         footer#footer, #footer, footer.footer, .footer, .footer-other, #footer .footer-bar, #footer .footer-wrap {
           background: #0f2e5e !important;
@@ -84,9 +105,11 @@ footer:
     enable: false
 
 # 访问统计
-# 关闭不蒜子（如果你在其它地方开启过，这里再次明确为 false）
+# 关闭不蒜子（Butterfly 5.5.0 用三个开关控制）
 busuanzi:
-  enable: false
+  site_uv: false
+  site_pv: false
+  page_pv: false
 
 # 使用 LeanCloud 统计 PV/UV（Butterfly 的常见配置写法，若你的主题版本采用不同字段名，也能忽略不影响）
 # 写法一：部分版本使用 pageview + leancloud 段落
@@ -108,6 +131,8 @@ leancloud_visitors:
   site_pv: true
   site_uv: true
   page_pv: true
+
+# 使用 LeanCloud 前端直连统计 PV/UV 并填充到主题的占位元素（脚本已注入 inject.bottom）
 
 # 搜索
 local_search:
