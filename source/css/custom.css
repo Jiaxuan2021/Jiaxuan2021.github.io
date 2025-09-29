@@ -15,7 +15,7 @@ img.site-avatar, img.avatar, .site-author-image img, .author-info .avatar img {
 /* Fallback: target the specific file path */
 img[src$="/img/portrait.jpg"], img[src*="/img/portrait.jpg"] {
   width: 90% !important;
-  /* height: 100% !important; */
+  height: 90 !important;
   border-radius: 50%;
   object-fit: cover;
   object-position: 50% 45%;
