@@ -47,6 +47,58 @@ img[src*="/img/portrait.png"] {
   }
 }
 
+/* --- Clouds on Home Banner --- */
+.clouds-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 2;              /* above banner, below UI overlays */
+  pointer-events: none;    /* do not block clicks */
+  overflow: hidden;
+}
+
+/* Single cloud puff assembled by shadows */
+.cloud {
+  position: absolute;
+  top: 10vh;
+  left: -20vw;
+  width: 240px;
+  height: 120px;
+  background: #fff;
+  opacity: .25;
+  border-radius: 100px;
+  filter: blur(.5px);
+  box-shadow:
+    -40px 10px 0 10px #fff,
+    20px 5px 0 14px #fff,
+    60px 15px 0 10px #fff;
+  animation-name: cloud-drift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes cloud-drift {
+  from { transform: translateX(-25vw); }
+  to   { transform: translateX(125vw); }
+}
+
+/* --- Falling Duck --- */
+.duck-drop {
+  position: fixed;
+  left: 0; top: 0;
+  transform: translate(-50%, -50%);
+  width: 64px; height: auto;
+  z-index: 9999;
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation: duck-fall 1.8s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+@keyframes duck-fall {
+  0%   { transform: translate(-50%, -50%) translateY(0) rotate(0deg); opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translate(-50%, -50%) translateY(60vh) rotate(var(--fall-rotate, 20deg)); opacity: 0; }
+}
+
 /* 回退方案：不支持 rotate 时使用 transform 旋转 */
 @supports not (rotate: 1turn) {
   html body img.site-avatar:hover,

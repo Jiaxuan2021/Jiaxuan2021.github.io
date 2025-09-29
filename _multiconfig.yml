@@ -91,17 +91,18 @@ lazyload:
 copy_btn: true
 code_copy:
   enable: true
-inject:
-  head:
-    - <link rel="icon" href="/img/yaziduck.png" type="image/png">
-    - <link rel="apple-touch-icon" href="/img/yaziduck.png">
-    - <link rel="stylesheet" href="/css/custom.css">
-  bottom:
-    - |
-      <style>
-        /* Stop theme's default transitions/animations on the avatar container
-           but do NOT lock the image's transform. This allows our hover spin
-           (which animates the image) to work across browsers. */
+  inject:
+    head:
+      - <link rel="icon" href="/img/yaziduck.png" type="image/png">
+      - <link rel="apple-touch-icon" href="/img/yaziduck.png">
+      - <link rel="stylesheet" href="/css/custom.css">
+    bottom:
+      - <script src="/js/site-effects.js"></script>
+      - |
+        <style>
+          /* Stop theme's default transitions/animations on the avatar container
+             but do NOT lock the image's transform. This allows our hover spin
+             (which animates the image) to work across browsers. */
         html body .avatar-img,
         html body .site-author-image,
         html body .author-info .avatar {
