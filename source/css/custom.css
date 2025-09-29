@@ -4,8 +4,8 @@ img.site-avatar, img.avatar, .site-author-image img, .author-info .avatar img {
   width: 100% !important;      /* fill container */
   height: 100% !important;
   border-radius: 50%;
-  object-fit: cover;            /* center crop */
-  object-position: 50% 42%; /* 调整向上约 4%，使主体居中 */
+  object-fit: contain;          /* 保证完整显示 */
+  object-position: center;      /* 居中显示 */
   animation: none !important;   /* 默认不旋转，覆盖主题样式 */
   transform: none !important;
   will-change: transform;
@@ -17,8 +17,8 @@ img[src$="/img/portrait.jpg"], img[src*="/img/portrait.jpg"] {
   width: 100% !important;
   height: 100% !important;
   border-radius: 50%;
-  object-fit: cover;
-  object-position: 50% 42%;
+  object-fit: contain;
+  object-position: center;
   animation: none !important;
   transform: none !important;
   will-change: transform;
