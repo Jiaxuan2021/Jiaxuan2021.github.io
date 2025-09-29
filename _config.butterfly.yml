@@ -30,8 +30,9 @@ inject:
     - <link rel="icon" href="/img/yaziduck.png" type="image/png">
     - <link rel="apple-touch-icon" href="/img/yaziduck.png">
     - <link rel="stylesheet" href="/css/custom.css">
+    - <script defer src="/js/site-effects.js"></script>
   bottom:
-    # 移除会覆盖主题动画的内联样式，交由主题控制 effect
+    - <script src="/js/site-effects.js"></script>
 
 # 页脚
 footer:

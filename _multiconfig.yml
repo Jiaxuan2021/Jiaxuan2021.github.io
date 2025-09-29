@@ -2,7 +2,6 @@ title: Jiaxuan's Homepage
 subtitle:
   enable: true
   text: 博士通关中
-  effect: true
 description: 博士通关中
 keywords: null
 author: jiaxuan
@@ -82,7 +81,7 @@ menu:
   About: /about/
 index_img: /img/banner.jpg
 avatar:
-  img: /img/portrait.png?v=2
+  img: /img/portrait.jpg?v=3
   effect: false
 pjax: true
 lazyload:
@@ -98,44 +97,6 @@ inject:
     - <link rel="stylesheet" href="/css/custom.css">
   bottom:
     - <script src="/js/site-effects.js"></script>
-    - |
-      <style>
-        /* Stop theme's default transitions/animations on the avatar container
-           but do NOT lock the image's transform. This allows our hover spin
-           (which animates the image) to work across browsers. */
-        html body .avatar-img,
-        html body .site-author-image,
-        html body .author-info .avatar {
-          animation: none !important;
-          transform: none !important;   /* neutralize container transforms */
-          transition: none !important;
-        }
-
-        /* Keep the image free of transform overrides so keyframes can drive it */
-        html body .avatar-img img,
-        html body .site-author-image img,
-        html body .author-info .avatar img,
-        html body img.site-avatar,
-        html body img.avatar {
-          animation: none !important;   /* default: not spinning */
-          /* no transform/transition here on purpose */
-        }
-
-        @keyframes avatar-spin { to { transform: rotate(360deg); } }
-        /* On hover, force rotation even with strong default disables */
-        html body img.site-avatar:hover,
-        html body img.avatar:hover,
-        html body .site-author-image:hover img,
-        html body .avatar-img:hover img,
-        html body .author-info .avatar:hover img,
-        html body img[src$="/img/portrait.jpg"]:hover,
-        html body img[src*="/img/portrait.jpg"]:hover,
-        html body img[src$="/img/portrait.png"]:hover,
-        html body img[src*="/img/portrait.png"]:hover {
-          animation: avatar-spin 1.2s linear infinite !important;
-          transition: none !important;
-        }
-      </style>
 footer:
   since: 2024
   icon: false
