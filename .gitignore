@@ -7,3 +7,6 @@ db.json
 npm-debug.log*
 yarn-error.log*
 package-lock.json
+
+test.txt
+MAINTENANCE.md

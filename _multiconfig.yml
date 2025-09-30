@@ -75,6 +75,11 @@ feed:
   type: atom
   path: atom.xml
   limit: 20
+leancloud_counter_security:
+  enable_sync: true
+  app_id: WgmQRFC1HEneq1k1Ptv6YRa7-MdYXbMMI
+  app_key: 23rJvxEYMEPpBst23zagP4sO
+  server_url: https://wgmqrfc1.api.lncldglobal.com
 menu:
   Home: /
   Archives: /archives/
@@ -86,16 +91,23 @@ avatar:
 pjax: true
 lazyload:
   enable: true
-  only: img
+  field: post
+  native: false
 copy_btn: true
 code_copy:
   enable: true
+favicon: /img/yaziduck.png?v=3
 inject:
   head:
-    - <link rel="icon" href="/img/yaziduck.png?v=2" type="image/png">
-    - <link rel="apple-touch-icon" href="/img/yaziduck.png?v=2">
+    - >-
+      <link rel="icon" href="/img/yaziduck.png?v=3" type="image/png"
+      sizes="any">
+    - <link rel="apple-touch-icon" sizes="180x180" href="/img/yaziduck.png?v=3">
     - <link rel="stylesheet" href="/css/custom.css?v=4">
     - <script defer src="/js/site-effects.js?v=5"></script>
+    - >-
+      <script
+      src="https://cdn.jsdelivr.net/npm/leancloud-storage@4/dist/av-min.js"></script>
   bottom:
     - >-
       <script> (function(){"use strict";const
@@ -142,7 +154,7 @@ inject:
         }
         #footer a, .footer a, .footer-other a { color: #1e4b8f !important; }
         #footer a:hover, .footer a:hover, .footer-other a:hover { color: #11386b !important; }
-        .footer-other { padding: 6px 0 !important; min-height: 38px !important; }
+        .footer-other { padding: 20px 0 !important; min-height: 38px !important; }
         #footer .footer-wrap { padding-top: 6px !important; padding-bottom: 6px !important; }
         footer#footer, #footer, footer.footer, .footer, .footer-other { position: relative !important; overflow: visible !important; }
 
@@ -158,6 +170,61 @@ inject:
           animation: footer-duck-walk var(--footer-duck-duration, 22s) linear 1 forwards; transform: translateX(-10vw); }
         @keyframes footer-duck-walk { 0% { transform: translateX(-10vw); opacity: 0; } 5% { opacity: 1; } 95% { transform: translateX(110vw); opacity: 1; } 100% { transform: translateX(110vw); opacity: 0; } }
       </style>
+    - >
+      <script>
+        (function(){
+          'use strict';
+          var APP_ID = 'WgmQRFC1HEneq1k1Ptv6YRa7-MdYXbMMI';
+          var APP_KEY = '23rJvxEYMEPpBst23zagP4sO';
+          var SERVER_URL = 'https://wgmqrfc1.api.lncldglobal.com';
+          function todayKey(){ var d=new Date(),m=d.getMonth()+1,dd=d.getDate(); return d.getFullYear()+'-'+(m<10?'0'+m:m)+'-'+(dd<10?'0'+dd:dd); }
+          function fmt(n){ try{ n=Number(n)||0; return n.toLocaleString(); }catch(e){ return String(n); } }
+      function onReady(fn){ if(document.readyState==='loading'){
+      document.addEventListener('DOMContentLoaded', fn, {once:true}); } else {
+      fn(); } }
+
+      function ensureSitePlaceholders(){
+        var uv = document.getElementById('busuanzi_value_site_uv');
+        var pv = document.getElementById('busuanzi_value_site_pv');
+        var box = document.querySelector('.card-webinfo .webinfo');
+        if(box){
+          if(!uv){
+            var item1 = document.createElement('div'); item1.className='webinfo-item';
+            var name1 = document.createElement('div'); name1.className='item-name'; name1.textContent='本站访客数 :';
+            var val1 = document.createElement('div'); val1.className='item-count'; val1.id='busuanzi_value_site_uv'; val1.textContent='0';
+            item1.appendChild(name1); item1.appendChild(val1); box.appendChild(item1);
+          }
+          if(!pv){
+            var item2 = document.createElement('div'); item2.className='webinfo-item';
+            var name2 = document.createElement('div'); name2.className='item-name'; name2.textContent='本站总浏览量 :';
+            var val2 = document.createElement('div'); val2.className='item-count'; val2.id='busuanzi_value_site_pv'; val2.textContent='0';
+            item2.appendChild(name2); item2.appendChild(val2); box.appendChild(item2);
+          }
+        }
+      }
+
+      function ensurePagePlaceholder(){
+        var ppv = document.getElementById('busuanzi_value_page_pv');
+        if(ppv) return;
+        var meta = document.querySelector('#post-meta .meta-secondline') || document.querySelector('#post-info .meta-secondline');
+        if(!meta) return;
+        var wrap = document.createElement('span'); wrap.className='post-meta-pv-cv';
+        var icon = document.createElement('i'); icon.className='far fa-eye fa-fw post-meta-icon';
+        var label = document.createElement('span'); label.className='post-meta-label'; label.textContent='浏览量:';
+        var val = document.createElement('span'); val.id='busuanzi_value_page_pv'; val.textContent='0';
+        wrap.appendChild(icon); wrap.appendChild(label); wrap.appendChild(val);
+        meta.appendChild(wrap);
+      }
+          function ensureAv(cb){ if(window.AV && AV.init){ cb(); return; } console.error('LeanCloud SDK not loaded'); }
+          function normPath(){ var p = location.pathname; if (p.endsWith('index.html')) p = p.replace(/index\.html$/, '/'); if (!p.endsWith('/')) p += '/'; return p; }
+          function updateEl(id, val){ var el=document.getElementById(id); if(el){ el.textContent = fmt(val); } }
+          function incSitePV(AV){ var Q = new AV.Query('Site'); Q.equalTo('name','global'); return Q.first().catch(function(){return null;}).then(function(obj){ if(!obj){ obj = new AV.Object('Site'); obj.set('name','global'); obj.set('pv',0); obj.set('uv',0); } obj.increment('pv',1); return obj.save().then(function(saved){ return saved.get('pv'); }); }); }
+          function incSiteUV(AV){ var key='LC_UV_'+todayKey(); if(sessionStorage.getItem(key)){ return Promise.resolve(null); } sessionStorage.setItem(key,'1'); var Q = new AV.Query('Site'); Q.equalTo('name','global'); return Q.first().catch(function(){return null;}).then(function(obj){ if(!obj){ obj = new AV.Object('Site'); obj.set('name','global'); obj.set('pv',0); obj.set('uv',0); } obj.increment('uv',1); return obj.save().then(function(saved){ return saved.get('uv'); }); }); }
+          function incPagePV(AV){ var url = normPath(); var Q = new AV.Query('Counter'); Q.equalTo('url', url); return Q.first().catch(function(){return null;}).then(function(obj){ if(!obj){ obj = new AV.Object('Counter'); obj.set('url', url); obj.set('title', document.title || url); obj.set('time',0); } obj.increment('time',1); return obj.save().then(function(saved){ return saved.get('time'); }); }); }
+          onReady(function(){ ensureSitePlaceholders(); ensurePagePlaceholder(); ensureAv(function(){ try{ AV.init({ appId: APP_ID, appKey: APP_KEY, serverURL: SERVER_URL }); }catch(e){ console.error(e); return; } incSitePV(AV).then(function(pv){ if(pv!=null) updateEl('busuanzi_value_site_pv', pv); }).catch(console.error); incSiteUV(AV).then(function(uv){ if(uv!=null) updateEl('busuanzi_value_site_uv', uv); }).catch(console.error); incPagePV(AV).then(function(ppv){ if(ppv!=null) updateEl('busuanzi_value_page_pv', ppv); }).catch(console.error); }); });
+          document.addEventListener('pjax:complete', function(){ onReady(function(){ ensureSitePlaceholders(); ensurePagePlaceholder(); ensureAv(function(){ incSitePV(AV).then(function(pv){ if(pv!=null) updateEl('busuanzi_value_site_pv', pv); }).catch(console.error); incPagePV(AV).then(function(ppv){ if(ppv!=null) updateEl('busuanzi_value_page_pv', ppv); }).catch(console.error); }); }); });
+        })();
+      </script>
     - |
       <style>
         footer#footer, #footer, footer.footer, .footer, .footer-other, #footer .footer-bar, #footer .footer-wrap {
@@ -173,6 +240,27 @@ inject:
 footer:
   since: 2024
   icon: false
+  copyright:
+    enable: false
+busuanzi:
+  site_uv: false
+  site_pv: false
+  page_pv: false
+pageview:
+  enable: true
+  source: leancloud
+leancloud:
+  app_id: WgmQRFC1HEneq1k1Ptv6YRa7-MdYXbMMI
+  app_key: 23rJvxEYMEPpBst23zagP4sO
+  server_url: https://wgmqrfc1.api.lncldglobal.com
+leancloud_visitors:
+  enable: true
+  app_id: WgmQRFC1HEneq1k1Ptv6YRa7-MdYXbMMI
+  app_key: 23rJvxEYMEPpBst23zagP4sO
+  server_url: https://wgmqrfc1.api.lncldglobal.com
+  site_pv: true
+  site_uv: true
+  page_pv: true
 local_search:
   enable: true
   trigger: auto
@@ -182,3 +270,21 @@ animation:
   enable: true
   post_list: true
   mask: true
+aside:
+  enable: true
+  card_announcement:
+    enable: true
+    content: |
+      欢迎来到本站！🎉<br>
+      - 近期更新：新增两篇博文；<br>
+      - 联系方式：liu_jiaxuan2021@163.com<br>
+      - 框架 Hexo 8.0.0，主题 Butterfly 5.5.0
+    hide: false
+  card_author:
+    enable: true
+    description: null
+    button:
+      enable: true
+      icon: fab fa-github
+      text: Follow Me
+      link: https://github.com/Jiaxuan2021
