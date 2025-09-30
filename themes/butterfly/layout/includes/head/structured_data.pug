@@ -42,9 +42,11 @@ if theme.structured_data
       if (isRootOrSubdomain) {
         const domain = new URL(config.url).hostname;
         const alternateNames = theme.structured_data.alternate_name || [];
-
-        if (config.subtitle) {
+        // Only push subtitle when it's a plain string; avoid pushing objects which become "[object Object]"
+        if (typeof config.subtitle === 'string' && config.subtitle.trim()) {
           alternateNames.push(config.subtitle);
+        } else if (theme.subtitle && theme.subtitle.enable && typeof theme.subtitle.text === 'string' && theme.subtitle.text.trim()) {
+          alternateNames.push(theme.subtitle.text);
         }
 
         if (domain) {
