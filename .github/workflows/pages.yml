@@ -38,7 +38,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Build
-        run: pnpm exec hexo generate
+        run: pnpm exec hexo generate --config _config.yml,_config.butterfly.yml
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
