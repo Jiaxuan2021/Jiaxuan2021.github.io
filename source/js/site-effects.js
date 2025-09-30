@@ -136,7 +136,7 @@
     img.alt = 'duck';
     img.onerror = function () { this.onerror = null; this.src = DUCK_SRC_FALLBACK; };
     // Randomize a slight duration variance per loop to feel organic
-    const base = 22; // seconds
+    const base = 35; // seconds (slower movement)
     const jitter = Math.random() * 4 - 2; // -2..+2s
     img.style.setProperty('--footer-duck-duration', (base + jitter).toFixed(1) + 's');
     container.appendChild(img);
