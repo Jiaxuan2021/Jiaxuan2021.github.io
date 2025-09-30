@@ -26,9 +26,9 @@ copyright: false
   ```
 
 - Linux
-```bash
+  ```bash
   sudo systemd-resolve --flush-caches
- ```
+  ```
 
  常见的情况：电脑把DNS查询请求都发给了路由器，再由路由器向上一级的ISP（网络服务商）或它自己设置的DNS服务器转发
  也可以自己设置为公用的DNS
@@ -59,9 +59,9 @@ copyright: false
 - 目的：确认某单位是否拥有/使用某 IP 网段（例如：`103.189.154.0/23` 覆盖 `103.189.154.0–103.189.155.255`）。
 
 - 首先查询IP，例如
-```bash
-  nslookup www.hkust-gz.edu.cn
-  ```
+  ```bash
+    nslookup www.hkust-gz.edu.cn
+    ```
 - 再使用whois IP，查看inetnum即为网段范围
 
 ## 四、用 dig 确定域名的权威 DNS 与解析路径
