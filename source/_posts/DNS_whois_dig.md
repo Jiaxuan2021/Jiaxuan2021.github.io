@@ -33,9 +33,9 @@ copyright: false
  常见的情况：电脑把DNS查询请求都发给了路由器，再由路由器向上一级的ISP（网络服务商）或它自己设置的DNS服务器转发
  也可以自己设置为公用的DNS
 
- ## 二、查看本地 DNS 配置
+## 二、查看本地 DNS 配置
 
- - Windows（仅显示含 “DNS” 的行）
+- Windows（仅显示含 “DNS” 的行）
   ```cmd
   ipconfig /all | findstr "DNS"
   ```
