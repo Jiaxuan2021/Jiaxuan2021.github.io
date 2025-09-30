@@ -27,12 +27,12 @@ code_copy:
 
 # 站点图标与自定义注入
 # 优先使用主题内置 favicon_tag 渲染，统一各页面的标签图标
-favicon: /img/yaziduck.png?v=2
+favicon: /img/yaziduck.png?v=3
 # 通过 inject 在 <head> 中注入 favicon 与自定义样式（保留，作为兜底）
 inject:
   head:
-    - <link rel="icon" href="/img/yaziduck.png?v=2" type="image/png">
-    - <link rel="apple-touch-icon" href="/img/yaziduck.png?v=2">
+    - <link rel="icon" href="/img/yaziduck.png?v=3" type="image/png" sizes="any">
+    - <link rel="apple-touch-icon" sizes="180x180" href="/img/yaziduck.png?v=3">
     - <link rel="stylesheet" href="/css/custom.css?v=4">
     - <script defer src="/js/site-effects.js?v=5"></script>
     - <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4/dist/av-min.js"></script>
