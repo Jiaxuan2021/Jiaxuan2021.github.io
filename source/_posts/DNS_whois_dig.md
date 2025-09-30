@@ -12,7 +12,7 @@ copyright: false
 ---
 
 
-## 一、清理 DNS 缓存
+## 清理 DNS 缓存
 
 网络诊断或者做一些抓包实验有时候需要清理DNS缓存
 
@@ -34,7 +34,7 @@ copyright: false
  常见的情况：电脑把DNS查询请求都发给了路由器，再由路由器向上一级的ISP（网络服务商）或它自己设置的DNS服务器转发
  也可以自己设置为公用的DNS
 
-## 二、查看本地 DNS 配置
+## 查看本地 DNS 配置
 
 - Windows（仅显示含 “DNS” 的行）
   ```cmd
@@ -53,7 +53,7 @@ copyright: false
   cat /etc/resolv.conf     # 某些环境由 NetworkManager/容器接管
   ```
 
-## 三、用 whois 确认机构的 IP 网段
+## 用 whois 确认机构的 IP 网段
 
 有时使用机构内网需要知道其IP网段
 
@@ -65,7 +65,7 @@ copyright: false
     ```
 - 再使用whois IP，查看inetnum即为网段范围
 
-## 四、用 dig 确定域名的权威 DNS 与解析路径
+## 用 dig 确定域名的权威 DNS 与解析路径
 
 - 使用dig可以确定解析校内网址（如学院名soch.hkust-gz.edu.cn）的DNS位于哪里
 
