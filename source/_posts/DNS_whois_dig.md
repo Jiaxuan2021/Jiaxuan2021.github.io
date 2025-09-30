@@ -11,9 +11,10 @@ tags:
 copyright: false
 ---
 
-网络诊断或者做一些抓包实验有时候需要清理DNS缓存
 
 ## 一、清理 DNS 缓存
+
+网络诊断或者做一些抓包实验有时候需要清理DNS缓存
 
 - macOS
   ```bash

@@ -18,7 +18,9 @@ subtitle:
 pjax: true
 lazyload:
   enable: true
-  only: img
+  # 仅对文章内容懒加载，避免侧边栏/导航等基础 UI 被懒加载后 PJAX 下不刷新
+  field: post
+  native: false
 copy_btn: true
 code_copy:
   enable: true

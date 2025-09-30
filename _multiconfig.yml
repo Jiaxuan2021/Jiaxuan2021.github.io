@@ -91,7 +91,8 @@ avatar:
 pjax: true
 lazyload:
   enable: true
-  only: img
+  field: post
+  native: false
 copy_btn: true
 code_copy:
   enable: true
