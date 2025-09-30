@@ -96,6 +96,7 @@ lazyload:
 copy_btn: true
 code_copy:
   enable: true
+favicon: /img/yaziduck.png?v=2
 inject:
   head:
     - <link rel="icon" href="/img/yaziduck.png?v=2" type="image/png">

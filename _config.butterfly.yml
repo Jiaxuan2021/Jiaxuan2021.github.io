@@ -26,7 +26,9 @@ code_copy:
   enable: true
 
 # 站点图标与自定义注入
-# 通过 inject 在 <head> 中注入 favicon 与自定义样式
+# 优先使用主题内置 favicon_tag 渲染，统一各页面的标签图标
+favicon: /img/yaziduck.png?v=2
+# 通过 inject 在 <head> 中注入 favicon 与自定义样式（保留，作为兜底）
 inject:
   head:
     - <link rel="icon" href="/img/yaziduck.png?v=2" type="image/png">
