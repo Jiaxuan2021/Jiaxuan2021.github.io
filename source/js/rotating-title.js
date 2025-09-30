@@ -26,7 +26,7 @@
         const siteTitle = document.getElementById('site-title');
         if (siteTitle) {
             const dayIndex = getDayIndex();
-            siteTitle.textContent = words[dayIndex];
+            siteTitle.innerHTML = words[dayIndex] + '<br><span style="font-size: 0.6em; font-weight: normal;">你好，我是Jiaxuan，欢迎来到我的主页</span>';
         }
     }
     

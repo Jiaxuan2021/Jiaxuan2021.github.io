@@ -26,7 +26,7 @@ tags:
 
 ### Mac 远程 Windows
 
-若Windows中域名已经解析到ip地址，在Mac上下载Windows app即可，同样填写主机名称使用用户名密码即可远程。app store中可以搜到。
+若Windows中域名已经解析到ip地址，在Mac上下载Windows app即可，同样填写主机名称使用用户名密码即可远程。app store中可以搜到Windows app。
 
 ### 手机 远程 Windows
 
