@@ -35,6 +35,7 @@ inject:
     - <link rel="apple-touch-icon" sizes="180x180" href="/img/yaziduck.png?v=3">
     - <link rel="stylesheet" href="/css/custom.css?v=4">
     - <script defer src="/js/site-effects.js?v=5"></script>
+    - <script defer src="/js/rotating-title.js?v=1"></script>
     - <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4/dist/av-min.js"></script>
   bottom:
     - <script>
