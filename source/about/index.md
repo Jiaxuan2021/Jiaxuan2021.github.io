@@ -8,11 +8,11 @@ type: "about"
 
 - MSc in Information and Communication Engineering
 
-    <small>National University of Defense Technology</small>
+    *National University of Defense Technology*
 
 - BSc in Electronic Information Engineering
 
-    <small>Harbin Engineering University</small>
+    *Harbin Engineering University*
 
 HKUST(GZ) PhD通关中，菜但是爱玩🎃。
 
