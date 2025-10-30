@@ -5,6 +5,9 @@ categories:
   - 工具
 tags:
   - Serverless
+  - Distributed training
+  - Tmux
+  - Claude code
 copyright: false
 ---
 
@@ -52,4 +55,25 @@ slurm或者Kubernetes主要还是用于运维多机多卡之间的通信协同�
     当年李沐大神也解读了这篇文章[Link](https://www.bilibili.com/video/BV1tY411g7ZT)，李沐大佬自己就是这个领域的，讲的也很好理解。这篇文章微软官方也写了一篇帖子[Link](https://www.microsoft.com/en-us/research/blog/zero-deepspeed-new-system-optimizations-enable-training-models-with-over-100-billion-parameters/)，里面还做了一个演示视频，非常清晰的演示了整个分布式训练的整个流程，讲的特别好。
 
     > DeepSpeed使用教程可以参考 [Link](https://github.com/deepspeedai/DeepSpeedExamples/tree/master/applications/DeepSpeed-Chat/training/step1_supervised_finetuning)，一般先使用Zero stage 1，显存不够再使用Stage 2，还不够再使用Stage 3。具体使用时有什么bug后续再来记录。
+
+## Tmux
+
+> 连接服务器必用
+
+用户与服务器的临时交互称（终端窗口）为一次会话（session），这个窗口和它的启动进程是关联的，进程会随着窗口一起关闭。某些时候网络断开，就算没有运行完会话内部的进程也被终止了，这样就找不回上一次执行的命令。
+
+Tmux的作用将会话和窗口解绑，窗口关闭时，会话并不终止，而是继续运行，等到以后需要的时候，再让会话"绑定"其他窗口，和screen相似，但screen窗口存在各种bug，tmux相比来说更好用。此外，它允许每个会话有多个连接窗口，因此可以多人实时共享会话。
+
+## Claude code 恢复对话
+
+- Linux or macOS
+  ```bash
+  claude -c   # 启动
+  ```
+
+或者claude code中输入
+- Linux or macOS
+  ```bash
+  /resume  
+  ```
 
