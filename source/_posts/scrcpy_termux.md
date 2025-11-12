@@ -174,7 +174,7 @@ proot-distro install debian
 ```
 安装好后如图所示
 
-<img src="./static/termux-1.png" alt="安装debian" style="width:70%;display:block;margin:0 auto;">
+<img src="termux-1.png" alt="安装debian" style="width:70%;display:block;margin:0 auto;">
 
 随后可以使用下面的命令进入debian
 
