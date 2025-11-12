@@ -67,13 +67,13 @@ Tmux的作用将会话和窗口解绑，窗口关闭时，会话并不终止，�
 ## Claude code 恢复对话
 
 - Linux or macOS
-  ```bash
-  claude -c   # 启动
-  ```
+```bash
+claude -c   # 启动
+```
 
 或者claude code中输入
 - Linux or macOS
-  ```bash
-  /resume  
-  ```
+```bash
+/resume  
+```
 

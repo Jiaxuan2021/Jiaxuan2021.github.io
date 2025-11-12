@@ -1,5 +1,5 @@
 ---
-title: Easyconnect 放入 Docker 中避免流量劫持和监控
+title: EasyConnect 放入 Docker 中避免流量劫持和监控
 copyright: false
 date: 2025-10-29 22:45:59
 categories:
@@ -29,25 +29,25 @@ EasyConnect是深信服(Sangfor)开发的VPN客户端软件，常用于：
 若没有安装的话，在MacOS上使用Homebrew安装Docker
 
 - macOS
-  ```zsh
-  brew install --cask docker
-  ```
+```zsh
+brew install --cask docker
+```
 
 启动Docker
 
 - macOS
-  ```zsh
-  open -a docker
-  ```
+```zsh
+open -a docker
+```
 
 可以在`Docker Engine`JSON中配置一下国内镜像源，然后`Apply & Restart`
 
 - macOS
-  ```json
-  {
-    "registry-mirrors": ["https://registry.docker-cn.com"]
-      }
-  ```
+```json
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+    }
+```
 
 ### 2. 运行容器命令
 
@@ -56,9 +56,9 @@ EasyConnect是深信服(Sangfor)开发的VPN客户端软件，常用于：
 `hagb/docker-easyconnect` 是一个专门为运行EasyConnect设计的Docker镜像，包含基础操作系统（通常是Alpine或Debian）、EasyConnect客户端及其依赖、VNC服务器等。
 
 - macOS
-  ```zsh
-  alias easyconnect='docker run --rm --device /dev/net/tun --cap-add NET_ADMIN -ti -e PASSWORD=xxxx -e DISABLE_PKG_VERSION_XML=1 -e URLWIN=1 -v $HOME/.ecdata:/root -p 127.0.0.1:5901:5901 -p 127.0.0.1:1081:1080 -p 127.0.0.1:8889:8888 hagb/docker-easyconnect:latest'
-  ```
+```zsh
+alias easyconnect='docker run --rm --device /dev/net/tun --cap-add NET_ADMIN -ti -e PASSWORD=xxxx -e DISABLE_PKG_VERSION_XML=1 -e URLWIN=1 -v $HOME/.ecdata:/root -p 127.0.0.1:5901:5901 -p 127.0.0.1:1081:1080 -p 127.0.0.1:8889:8888 hagb/docker-easyconnect:latest'
+```
 
 参数解释：
 
@@ -93,9 +93,9 @@ EasyConnect是深信服(Sangfor)开发的VPN客户端软件，常用于：
 一般只有某些命令需要走校园网，比如ssh，一般单独使用就行
 
 - macOS
-  ```zsh
-  ssh -o ProxyCommand="nc -x 127.0.0.1:1081 %h %p" -p 12345 root@school_ip
-  ```
+```zsh
+ssh -o ProxyCommand="nc -x 127.0.0.1:1081 %h %p" -p 12345 root@school_ip
+```
 
 > - -o ProxyCommand：SSH 的代理配置选项
 > - nc -x 127.0.0.1:1081：使用 netcat 通过 SOCKS5 代理连接
@@ -104,9 +104,9 @@ EasyConnect是深信服(Sangfor)开发的VPN客户端软件，常用于：
 或者
 
 - macOS
-  ```zsh
-  ssh -o ProxyCommand="connect -S 127.0.0.1:1081 %h %p" -p 12345 root@school_ip
-  ```
+```zsh
+ssh -o ProxyCommand="connect -S 127.0.0.1:1081 %h %p" -p 12345 root@school_ip
+```
 
 > - connect -S 127.0.0.1:1081：使用 connect 工具通过 SOCKS5 代理
 
@@ -114,32 +114,32 @@ EasyConnect是深信服(Sangfor)开发的VPN客户端软件，常用于：
 使用的较多可以直接写到 `~/.ssh/config`
 
 - macOS
-  ```zsh
-  echo '
-  Host 校内服务器
-      HostName school_ip
-      Port 12345
-      User root
-      ProxyCommand nc -x 127.0.0.1:1081 %h %p
-  ' >> ~/.ssh/config
-  ```
+```zsh
+echo '
+Host 校内服务器
+    HostName school_ip
+    Port 12345
+    User root
+    ProxyCommand nc -x 127.0.0.1:1081 %h %p
+' >> ~/.ssh/config
+```
 
 终端HTTP（临时设置，当前终端有效）
 
 - macOS
-  ```zsh
-  export http_proxy=http://127.0.0.1:8889
-  export https_proxy=http://127.0.0.1:8889
-  ```
+```zsh
+export http_proxy=http://127.0.0.1:8889
+export https_proxy=http://127.0.0.1:8889
+```
 
 其他命令使用校园网，也可以自己写一个sh脚本，用函数来控制代理开关，使用 `export` 的方式（只针对http、https，ftp，一般不支持socks5）。也可以专门开一个终端只走校园网。
 
 - macOS
-  ```zsh
-  curl --socks5 127.0.0.1:1081 http://校内网站
-  ```
+```zsh
+curl --socks5 127.0.0.1:1081 http://校内网站
+```
 
 - macOS
-  ```zsh
-  rsync -e 'ssh -o ProxyCommand="nc -x 127.0.0.1:1081 %h %p"' 源目录 目标目录
-  ```
+```zsh
+rsync -e 'ssh -o ProxyCommand="nc -x 127.0.0.1:1081 %h %p"' 源目录 目标目录
+```
