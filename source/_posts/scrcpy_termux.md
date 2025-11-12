@@ -173,6 +173,10 @@ pkg install proot-distro pulseaudio vim
 proot-distro install debian
 ```
 
+使用proot-distro安装debian如图所示
+
+<img src="termux-1.png" alt="安装debian" style="width:70%;display:block;margin:0 auto;">
+
 随后可以使用下面的命令进入debian
 
 - Termux
