@@ -165,6 +165,74 @@ echo "gnome-session" > ~/.xsession
 
 windows客户端直接使用自带的远程桌面连接就行，Mac需要下载Microsoft Remote Desktop。
 
+####  更新：GUI连接依旧黑屏并且没有Dock的问题
+
+1. rdp连接ubuntu依旧黑屏
+
+Ubuntu 的 GNOME 桌面环境在通过 xrdp 登录时，经常因为环境变量冲突导致黑屏。即使你注销了本地用户，有时也会黑屏。需要修改`startwm.sh`脚本来解决这个问题。
+
+- Linux
+```bash
+sudo vim /etc/xrdp/startwm.sh
+```
+
+添加配置：找到文件末尾的 `test -x /etc/X11/Xsession && exec /etc/X11/Xsession` 这几行之前，添加以下两行代码：
+
+- Linux
+```bash
+unset DBUS_SESSION_BUS_ADDRESS
+unset XDG_RUNTIME_DIR
+```
+
+重启xrdp服务：
+
+- Linux
+```bash
+sudo systemctl restart xrdp
+```
+
+> 这两行unset是为了解决会话复用和独立会话之间的问题。本地登陆或者系统启动时，`systemd`会为用户启动一系列后台服务。这些服务会生成一些环境变量。XRDP 实际上是启动了一个全新的图形显示服务器（Xorg），它是一个独立的、隔离的“房间”。
+
+> unset DBUS_SESSION_BUS_ADDRESS (切断通信干扰)
+> DBus 是 Linux 进程间通信的渠道。例如，当点击“设置”时，GUI 进程通过 DBus 告诉后台进程修改配置。问题是，当 XRDP 脚本启动时，它往往会继承系统中已经存在的、或者 SSH 会话中的环境变量。如果 XRDP 里的 GNOME 桌面读取到了旧的 DBUS_SESSION_BUS_ADDRESS，它会试图连接到物理机上的那个会话去注册自己。结果就是，新启动的 RDP 桌面没有建立自己的通信频道，而是试图挤进物理机的频道。物理机会话（或 systemd）拒绝了这个请求，或者新桌面因为找不到自己的频道而卡死。因此unset它，强制新启动的桌面环境创建一个属于自己的、全新的 DBus 通信频道。
+
+> unset XDG_RUNTIME_DIR (防止文件锁冲突)
+> 这是一个临时目录，用来存放当前用户运行时的临时文件（Socket 文件等）。同理，如果 XRDP 继承了这个变量，它会试图去读写物理机会话正在使用的那个目录，这可能会造成权限冲突，或者文件锁死（Lock）。因此unset它，让系统为当前的 RDP 会话重新分配或管理运行时目录上下文。
+> 总之，这个两个unset告诉xrdp：不要管这台电脑上之前发生了什么，也不管物理机上有没有人登录，请给我初始化一个新的桌面环境。
+
+2. 连上gui界面后没有Dock
+
+好不容易不黑屏了但是没有显示任何菜单栏，那怎么打开应用呢？
+
+解决方法：创建`.xsessionrc`配置文件，终端运行以下命令，这会为用户创建一个配置文件，专门告诉 RDP 该加载什么主题。
+
+- Linux
+```bash
+cat <<EOF > ~/.xsessionrc
+export GNOME_SHELL_SESSION_MODE=ubuntu
+export XDG_CURRENT_DESKTOP=ubuntu:GNOME
+export XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+EOF
+```
+
+重启xrdp服务：
+
+- Linux
+```bash
+sudo systemctl restart xrdp
+```
+
+这时就能看到Dock了，但是貌似有点卡，可能rdp对linux对支持不太好，一般都用ssh。不过，如果上面这招不管用，又非得要GUI的话（查看某些程序的可视化），可以安装一个轻量级的桌面环境 Xfce，它在 RDP 下极其稳定（这也是很多 Linux 运维的首选方案，我们组内的VNC连接linux容器也是使用的这种方式）。
+
+安装`sudo apt install xfce4`
+配置xrdp使用xfce：`echo xfce4-session > ~/.xsession`
+重启 xrdp：`sudo systemctl restart xrdp`
+
+> Xfce4（XForms Common Environment 4）是一个用于 Linux 和 Unix 系统的桌面环境。
+
+> GNOME：依赖 3D 硬件加速（OpenGL）。它有很多透明、阴影、动态模糊特效。在 RDP 协议中，传输这些 3D 渲染画面非常消耗带宽和 CPU，而且如果没有物理显卡支持（或者虚拟显卡驱动不好），GNOME 直接就渲染不出来，导致黑屏或界面缺失。界面比较现代，类似 macOS/iPad。
+
+> Xfce4：默认使用 2D 渲染。它画窗口就是画矩形和线条。这种简单的图形指令非常容易通过 RDP 协议传输，带宽占用小，延迟低，且不需要显卡 3D 加速支持。Xfce 的依赖关系简单，它不太在乎是不是通过复杂的 Session 启动的，只要能连上 X server 就能显示。界面比较复古，有点winXP的感觉。
 
 ## 进程文件句柄耗尽
 
