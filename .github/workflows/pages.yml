@@ -2,13 +2,13 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main, master ]
-  workflow_dispatch:
+    branches: [ main, master ]  # 只要往 main 或 master 分支推送代码
+  workflow_dispatch:            # 或者你在网页上手动点击“运行”
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: read            # 允许访问仓库内容
+  pages: write              # 允许写入 GitHub Pages 相关资源
+  id-token: write           # 允许生成 GitHub Actions 令牌
 
 concurrency:
   group: "pages"
@@ -46,7 +46,7 @@ jobs:
           path: ./public
 
   deploy:
-    needs: build
+    needs: build   # 必须等“构建”步骤成功完成后才开始
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -54,4 +54,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v4  # 这是一个官方插件，直接把打包好的网页发布到 GitHub Pages

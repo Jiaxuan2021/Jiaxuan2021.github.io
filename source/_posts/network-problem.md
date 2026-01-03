@@ -102,6 +102,39 @@ New-NetFirewallRule -DisplayName "Allow Port 12345 Always" -Direction Inbound -L
 runas /user:MicrosoftAccount\邮箱@xxx.com cmd
 ``` 
 
+在rdp尝试密码的时候，超过一定次数可能会导致电脑账户锁定，可以使用：
+
+1. 在被控端的PowerShell（管理员）中运行这条命令，即告诉系统：“不管输错多少次密码，都不要锁定账户”。lockoutthreshold:0 表示将“帐户锁定阈值”设置为 0，即永不锁定。
+
+- windows
+```powershell
+net accounts /lockoutthreshold:0
+``` 
+
+2. 或者想保留锁定策略，但只想清除当前的错误记录，可以尝试重启远程桌面服务。运行
+
+- windows
+```powershell
+Restart-Service TermService -Force
+``` 
+
+当然，如果觉得死磕这个微软账户麻烦，完全可以新建一个账户，可以100%的解决问题。我希望使用自己的账户是因为配置了一些东西，不想重新配置一遍。
+
+- windows
+```powershell
+# 1. 创建一个新用户 (用户名: rdpadmin，密码: 12345678)
+net user rdpadmin 12345678 /add
+
+# 2. 把这个用户升级为管理员 (这样远程过去才有权限操作)
+net localgroup administrators rdpadmin /add
+
+# 3. 授予远程登录权限
+net localgroup "Remote Desktop Users" rdpadmin /add
+
+# 4. 确保该用户的密码永不过期
+Set-LocalUser -Name "rdpadmin" -PasswordNeverExpires $True
+``` 
+
 ## ubuntu ssh以及图形化界面远程访问
 
 ### ssh
