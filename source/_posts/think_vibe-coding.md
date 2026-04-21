@@ -32,3 +32,6 @@ categories:
 “把心沉下来，去质疑，去验证，去重构”
 
 参考[Link3](https://www.zhihu.com/question/1951716962645288920/answer/2002051220051871226?share_code=nDs4e0E1WhzG&utm_psn=2029895761471755176)
+
+
+以上纯属个人观点，看个乐呵就好，继续ai coding
