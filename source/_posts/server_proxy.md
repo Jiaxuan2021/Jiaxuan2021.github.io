@@ -111,7 +111,7 @@ ssh -L 59090:127.0.0.1:59090 your_username@server_login_ip
 
 Clash/Mihomo 本身考虑到了这个问题，内置了 Authentication (用户名密码认证) 功能。一旦加上，别人即使知道我的端口，连上来也会报错 `407 Proxy Authentication Required`。
 
-需要修改一下`config.yaml`，先关掉关掉正在运行的代理进程`clash_stop`
+需要修改一下`config.yaml`，先关掉正在运行的代理进程`clash_stop`
 
 - Linux
 ```bash
