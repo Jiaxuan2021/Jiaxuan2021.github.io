@@ -8,13 +8,12 @@ type: "about"
 
 本站只是个人学习思考笔记，看个乐呵就好。
 
-- MSc in Information and Communication Engineering
+### Education & Experience
 
-    *National University of Defense Technology*
-
-- BSc in Electronic Information Engineering
-
-    *Harbin Engineering University*
+- 2018.09 - 2022.06，BSc in Electronic Information Engineering, <span class="school-name">Harbin Engineering University</span>
+- 2022.09 - 2025.01，MSc in Information and Communication Engineering, <span class="school-name">National University of Defense Technology</span>
+- 2025.05 - 2025.09，RA, <span class="school-name">HKUST(GZ)</span>
+- 2025.09 - Present，PhD, <span class="school-name">HKUST(GZ)</span>
 
 HKUST(GZ) PhD通关中，爱折腾，菜但是爱玩🎃。
 
@@ -37,3 +36,7 @@ HKUST(GZ) PhD通关中，爱折腾，菜但是爱玩🎃。
 2026年4月
 
 好久没记录了，最近发生了很多事，时间过得飞快，这一行发展也是上高速了，感觉自己还在做古法学术，等忙完手头上的活我也追一波潮流，做一些新颖一点的东西。
+
+2026年7月
+
+来科广一年了，时间过的真快。先搞点学术吧。

@@ -142,3 +142,10 @@ img[src*="/img/portrait.png"] {
   95%  { transform: translateX(110vw); opacity: 1; }
   100% { transform: translateX(110vw); opacity: 0; }
 }
+
+/* School name styling in About page timeline */
+.school-name {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, "Times New Roman", serif;
+  font-style: italic;
+  letter-spacing: 0.2px;
+}

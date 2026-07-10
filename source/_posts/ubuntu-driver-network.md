@@ -1,5 +1,6 @@
 ---
 title: Ubuntu 系统更新显卡驱动后网络图标消失及驱动丢失的修复记录
+copyright: false
 date: 2026-05-22 14:49:19
 categories:
   - 运维
