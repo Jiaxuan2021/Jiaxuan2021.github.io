@@ -1,5 +1,5 @@
 ---
-title: claude_fenghao
+title: Claude安全使用实践记录
 date: 2026-08-01 20:32:17
 categories:
   - Claude
