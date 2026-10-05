@@ -8,6 +8,8 @@ type: "about"
 
 本站只是个人学习思考笔记，看个乐呵就好。
 
+个人简介简单一点，本人不简单。等博士毕业的时候再放完整简介😁。
+
 ### Education & Experience
 
 - 2018.09 - 2022.06，BSc in Electronic Information Engineering, <span class="school-name">Harbin Engineering University</span>
@@ -40,3 +42,7 @@ HKUST(GZ) PhD通关中，爱折腾，菜但是爱玩🎃。
 2026年7月
 
 来科广一年了，时间过的真快。先搞点学术吧。
+
+2026年10月
+
+学海无涯，还是差的太远了，要继续努力。
