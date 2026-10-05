@@ -5,8 +5,6 @@ date: 2026-08-01 20:32:17
 categories:
   - Claude
   - 网络
-  - 虚拟机
-  - 服务器
 tags:
   - Claude
   - VMWare
