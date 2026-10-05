@@ -38,7 +38,7 @@ if theme.aside.card_webinfo.enable
           .item-count#busuanzi_value_site_pv
             i.fa-solid.fa-spinner.fa-spin
       if theme.aside.card_webinfo.last_push_date
-        .webinfo-item
+        .webinfo-item.webinfo-item-last-update
           .item-name= `${_p('aside.card_webinfo.last_push_date.name')} :`
           .item-count#last-push-date(data-lastPushDate=date_xml(Date.now()))
             i.fa-solid.fa-spinner.fa-spin
