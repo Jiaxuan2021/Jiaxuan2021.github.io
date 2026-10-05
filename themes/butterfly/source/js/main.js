@@ -733,7 +733,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const $lastPushDateItem = document.getElementById('last-push-date')
     if ($lastPushDateItem) {
       const lastPushDate = $lastPushDateItem.getAttribute('data-lastPushDate')
-      $lastPushDateItem.textContent = btf.diffDate(lastPushDate, true)
+      // Display the build time in Beijing time, independent of the visitor's timezone.
+      const parts = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Asia/Shanghai',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hourCycle: 'h23'
+      }).formatToParts(new Date(lastPushDate))
+      const date = Object.fromEntries(parts.map(({ type, value }) => [type, value]))
+      $lastPushDateItem.textContent = `${date.year}-${date.month}-${date.day} ${date.hour}:${date.minute}:${date.second}`
+      $lastPushDateItem.title = '北京时间（UTC+8）'
     }
   }
 
